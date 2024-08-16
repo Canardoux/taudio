@@ -26,4 +26,9 @@ abstract class TaudioPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+  TaudioContext newContext() ;
+
+}
+
+abstract class TaudioContext {
 }

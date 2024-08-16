@@ -14,4 +14,10 @@ class MethodChannelTaudio extends TaudioPlatform {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+
+  @override
+  TaudioContext newContext() => TaudioContextEt(); 
+}
+
+class TaudioContextEt extends TaudioContext {
 }

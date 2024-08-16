@@ -23,4 +23,14 @@ class TaudioWeb extends TaudioPlatform {
     final version = web.window.navigator.userAgent;
     return version;
   }
+
+  @override
+  TaudioContext newContext() => TaudioContextWeb();
+  }
+
 }
+
+
+
+class TaudioContextWeb extends TaudioContext {
+ }
