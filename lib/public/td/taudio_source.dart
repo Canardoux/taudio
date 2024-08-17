@@ -17,3 +17,8 @@
  */
 
 class TaudioSource {}
+
+class FromUrl extends TaudioSource {
+  String path = '';
+  /* ctor */ FromUrl({required String this.path}) {}
+}

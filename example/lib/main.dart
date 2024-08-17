@@ -18,6 +18,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:taudio_example/td/taudio_examples.dart';
 import 'fs/flutter_sound_examples.dart';
 
 ///
@@ -26,7 +27,6 @@ import 'fs/flutter_sound_examples.dart';
 void main() {
   runApp(const ExamplesApp());
 }
-
 
 ///
 class ExamplesApp extends StatelessWidget {
@@ -96,11 +96,9 @@ class _ExamplesHomePageState extends State<ExamplesAppHomePage> {
                 child: const Text(
                   'Flutter Sound examples',
                 ),
-                onPressed: () 
-                {
-                 Navigator.of(context).push(
-                     MaterialPageRoute(builder: (context) => const FlutterSoundExamples()));
-                  
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const FlutterSoundExamples()));
                 }),
           ),
           Center(
@@ -109,12 +107,11 @@ class _ExamplesHomePageState extends State<ExamplesAppHomePage> {
                 'τ-audio examples',
               ),
               onPressed: () {
-                // Navigator.of(context).push(
-                //     MaterialPageRoute(builder: (context) => W3CExamples()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const TaudioExamples()));
               },
             ),
           ),
-  
         ],
       );
     }
@@ -122,7 +119,7 @@ class _ExamplesHomePageState extends State<ExamplesAppHomePage> {
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
-        title: const Text('Taudio Example'),
+        title: const Text('τ Examples'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(

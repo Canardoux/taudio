@@ -17,3 +17,17 @@
  */
 
 class TaudioDestination {}
+
+enum TaudioDeviceType {
+  defaultDevice,
+  speaker,
+  earPhone,
+  blueToothHeadPhone,
+}
+
+class OutputDevice extends TaudioDestination {
+  TaudioDeviceType type = TaudioDeviceType.defaultDevice;
+  /* ctor */ OutputDevice({this.type = TaudioDeviceType.defaultDevice}) {}
+  factory OutputDevice.speaker() =>
+      OutputDevice(type: TaudioDeviceType.speaker);
+}

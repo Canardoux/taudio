@@ -34,8 +34,6 @@
 /// {@category Main}
 library tau;
 
-export 'taudio_player.dart';
-export 'taudio_recorder.dart';
 export 'taudio_helper.dart';
 export 'taudio_source.dart';
 export 'taudio_destination.dart';

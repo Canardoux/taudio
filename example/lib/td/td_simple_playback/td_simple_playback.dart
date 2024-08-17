@@ -17,10 +17,10 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:taudio/taudio.dart';
-import 'package:web/web.dart';
+//import 'package:web/web.dart';
+//import 'package:flutter/widgets.dart';
 
 /*
  *
@@ -46,14 +46,14 @@ class TDSimplePlayback extends StatefulWidget {
 }
 
 class _TDSimplePlayback extends State<TDSimplePlayback> {
-  TaudioPlayer _player = TaudioPlayer();
+  Taudio _player = Taudio();
   bool _playerIsInited = false;
 
   @override
   void initState() {
     super.initState();
-    TaudioSource source = FromUrl(codec, _exampleAudioFilePathMP3);
-    TaudioDestination destination = Speaker();
+    TaudioSource source = FromUrl(path: _exampleAudioFilePathMP3);
+    TaudioDestination destination = OutputDevice.speaker();
     _player
         .open(
       from: source,
@@ -118,12 +118,12 @@ class _TDSimplePlayback extends State<TDSimplePlayback> {
                 onPressed: getPlaybackFn(),
                 //color: Colors.white,
                 //disabledColor: Colors.grey,
-                child: Text(_player.isPlaying ? 'Stop' : 'Play'),
+                child: Text(_player.isPlaying() ? 'Stop' : 'Play'),
               ),
               const SizedBox(
                 width: 20,
               ),
-              Text(_player.isPlaying
+              Text(_player.isPlaying()
                   ? 'Playback in progress'
                   : 'Player is stopped'),
             ]),

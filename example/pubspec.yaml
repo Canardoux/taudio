@@ -23,9 +23,10 @@ dependencies:
   intl: ^0.19.0
   audio_session: ^0.1.6
   logger: ^2.0.2
-  web: any
+  #web: ^1.0.0
   uuid: any
   synchronized: any
+  #flutter_inappwebview: 6.0.0
   
 
   taudio:

@@ -1,10 +1,10 @@
 name: taudio
 description: "Flutter Sound v 10.0"
 version: 0.0.1
-homepage:
+homepage: 'tau.canardoux.xyz'
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.4.0
   flutter: ">=1.17.0"
 
 dependencies:
