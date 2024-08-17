@@ -99,7 +99,7 @@ class _ExamplesHomePageState extends State<ExamplesAppHomePage> {
                 onPressed: () 
                 {
                  Navigator.of(context).push(
-                     MaterialPageRoute(builder: (context) => FlutterSoundExamples()));
+                     MaterialPageRoute(builder: (context) => const FlutterSoundExamples()));
                   
                 }),
           ),

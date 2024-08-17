@@ -15,22 +15,5 @@
  * You should have received a copy of the GNU General Public License
  * along with τ.  If not, see <https://www.gnu.org/licenses/>.
  */
-import 'taudio_source.dart';
-import 'taudio_destination.dart';
 
-class TaudioPlayer {
-  /* ctor */ TaudioPlayer();
-
-  Future<void> open({
-    required TaudioSource from,
-    required TaudioDestination to,
-  }) {}
-
-  Future<void> close() {}
-
-  Future<void> play() {}
-
-  Future<void> stop() {}
-
-  Future<void> rewind() {}
-}
+class TaudioSource {}

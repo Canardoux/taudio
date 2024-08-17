@@ -1,19 +1,19 @@
 /*
- * Copyright 2018, 2019, 2020 Dooboolab.
+ * Copyright 2024 Canardoux.
  *
- * This file is part of Flutter-Sound.
+ * This file is part of the τ project.
  *
- * Flutter-Sound is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License version 3 (LGPL-V3), as published by
+ * τ is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 (GPL3), as published by
  * the Free Software Foundation.
  *
- * Flutter-Sound is distributed in the hope that it will be useful,
+ * τ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Flutter-Sound.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with τ.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 // The three interfaces to the platform
@@ -175,14 +175,14 @@ const List<List<String>> validExt = [
 
 
 var mime_types = [
-  'audio/webm\;codecs=opus', // defaultCodec,
+  'audio/webm;codecs=opus', // defaultCodec,
   'audio/aac', // aacADTS, //*
-  'audio/opus\;codecs=opus', // opusOGG, // 'audio/ogg' 'audio/opus'
+  'audio/opus;codecs=opus', // opusOGG, // 'audio/ogg' 'audio/opus'
   'audio/x-caf', // opusCAF,
   'audio/mpeg', // mp3, //*
-  'audio/ogg\;codecs=vorbis', // vorbisOGG,// 'audio/ogg' // 'audio/vorbis'
+  'audio/ogg;codecs=vorbis', // vorbisOGG,// 'audio/ogg' // 'audio/vorbis'
   'audio/pcm', // pcm16,
-  'audio/wav\;codecs=1', // pcm16WAV,
+  'audio/wav;codecs=1', // pcm16WAV,
   'audio/aiff', // pcm16AIFF,
   'audio/x-caf', // pcm16CAF,
   'audio/x-flac', // flac, // 'audio/flac'
@@ -191,9 +191,9 @@ var mime_types = [
   'audio/AMR-WB', // amrWB, //*
   'audio/pcm', // pcm8,
   'audio/pcm', // pcmFloat32,
-  'audio/webm\;codecs=pcm', // pcmWebM,
-  'audio/webm\;codecs=opus', // opusWebM,
-  'audio/webm\;codecs=vorbis', // vorbisWebM
+  'audio/webm;codecs=pcm', // pcmWebM,
+  'audio/webm;codecs=opus', // opusWebM,
+  'audio/webm;codecs=vorbis', // vorbisWebM
 ];
 
 

@@ -1,19 +1,19 @@
 /*
- * Copyright 2018, 2019, 2020 Dooboolab.
+ * Copyright 2024 Canardoux.
  *
- * This file is part of Flutter-Sound.
+ * This file is part of the τ project.
  *
- * Flutter-Sound is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General License version 3 (LGPL-V3), as published by
+ * τ is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 (GPL3), as published by
  * the Free Software Foundation.
  *
- * Flutter-Sound is distributed in the hope that it will be useful,
+ * τ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General License for more details.
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General License
- * along with Flutter-Sound.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with τ.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /// --------
@@ -41,19 +41,19 @@ import 'dart:core';
 /// </ul>
 class WaveHeader {
   /// follows WAVE format in http://ccrma.stanford.edu/courses/422/projects/WaveFormat
-  static final String tag = 'WaveHeader';
+  static const String tag = 'WaveHeader';
 
   ///
-  static final int headerLength = 44;
+  static const int headerLength = 44;
 
   /// Indicates PCM format.
-  static final int formatPCM = 1;
+  static const int formatPCM = 1;
 
   /// Indicates ALAW format.
-  static final int formatALAW = 6;
+  static const int formatALAW = 6;
 
   /// Indicates ULAW format.
-  static final int formatULAW = 7;
+  static const int formatULAW = 7;
 
   ///
   int mFormat;

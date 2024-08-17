@@ -392,7 +392,7 @@ class _FlutterSoundExamples extends State<FlutterSoundExamples> {
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
-        title: Text('La plume du chapeau'),
+        title: const Text('La plume du chapeau'),
       ),
       body: makeBody(),
       bottomNavigationBar: BottomAppBar(

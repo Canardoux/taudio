@@ -1,19 +1,19 @@
 /*
- * Copyright 2018, 2019, 2020 Dooboolab.
+ * Copyright 2024 Canardoux.
  *
- * This file is part of Flutter-Sound.
+ * This file is part of the τ project.
  *
- * Flutter-Sound is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License version 3 (LGPL-V3), as published by
+ * τ is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 (GPL3), as published by
  * the Free Software Foundation.
  *
- * Flutter-Sound is distributed in the hope that it will be useful,
+ * τ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Flutter-Sound.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with τ.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /// **THE** Flutter Sound Recorder
@@ -27,10 +27,8 @@ import 'dart:typed_data';
 import 'package:logger/logger.dart' show Level, Logger;
 import 'package:path/path.dart' as p;
 import 'package:synchronized/synchronized.dart';
-import 'package:flutter/foundation.dart' as Foundation;
 import 'fs.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/src/services/platform_channel.dart';
 import 'dart:io' show Platform;
 
 
@@ -627,7 +625,7 @@ class FlutterSoundRecorder{
   /// Get the sampleRate used by startRecorder()
   Future<int> getSampleRate() async {
     _logger.d('FS:---> getSampleRate');
-    Future<int>? r = null;
+    Future<int>? r;
     await _lock.synchronized(() async {
       r = _getSampleRate();
     });
@@ -797,7 +795,7 @@ class RecordingDisposition {
   /// use this ctor to as the initial value when building
   /// a `StreamBuilder`
   RecordingDisposition.zero()
-      : duration = Duration(seconds: 0),
+      : duration = const Duration(seconds: 0),
         decibels = 0;
 
   /// Return a String representation of the Disposition
@@ -816,15 +814,15 @@ class _RecorderException implements Exception {
 }
 
 class _RecorderRunningException extends _RecorderException {
-  _RecorderRunningException(String message) : super(message);
+  _RecorderRunningException(super.message);
 }
 
 class _CodecNotSupportedException extends _RecorderException {
-  _CodecNotSupportedException(String message) : super(message);
+  _CodecNotSupportedException(super.message);
 }
 
 /// Permission to record was not granted
 class RecordingPermissionException extends _RecorderException {
   ///  Permission to record was not granted
-  RecordingPermissionException(String message) : super(message);
+  RecordingPermissionException(super.message);
 }

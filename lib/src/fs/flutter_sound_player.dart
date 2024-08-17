@@ -1,19 +1,19 @@
 /*
- * Copyright 2018, 2019, 2020 Dooboolab.
+ * Copyright 2024 Canardoux.
  *
- * This file is part of Flutter-Sound.
+ * This file is part of the τ project.
  *
- * Flutter-Sound is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License version 3 (LGPL-V3), as published by
+ * τ is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 (GPL3), as published by
  * the Free Software Foundation.
  *
- * Flutter-Sound is distributed in the hope that it will be useful,
+ * τ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Flutter-Sound.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with τ.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 /// **THE** Flutter Sound Player
@@ -142,7 +142,7 @@ class FlutterSoundPlayer {
   int oldPosition = 0;
 
   ///
-  PlayerState _playerState = PlayerState.isStopped;
+  final PlayerState _playerState = PlayerState.isStopped;
 
   /// The current state of the Player
   PlayerState get playerState => _playerState;
@@ -169,7 +169,7 @@ class FlutterSoundPlayer {
   /// myPlayer.foodSink.add(FoodEvent((){_mPlayer.stopPlayer();}));
   /// ```
   StreamSink<Food>? get foodSink =>
-      _foodStreamController != null ? _foodStreamController!.sink : null;
+      _foodStreamController?.sink;
 
   /// The stream side of the Food Controller
   ///
@@ -190,7 +190,7 @@ class FlutterSoundPlayer {
   ///         }
   /// ```
   Stream<PlaybackDisposition>? get onProgress =>
-      _playerController != null ? _playerController!.stream : null;
+      _playerController?.stream;
 
   /// Return true if the Player has been open
   bool isOpen() {
@@ -219,7 +219,7 @@ class FlutterSoundPlayer {
   /// If you pause the audio then no updates will be sent to the
   /// stream.
   Stream<PlaybackDisposition>? dispositionStream() {
-    return _playerController != null ? _playerController!.stream : null;
+    return _playerController?.stream;
   }
 
   /// User callback "whenFinished:"
@@ -377,7 +377,7 @@ class FlutterSoundPlayer {
   /// ```
   Future<Map<String, Duration>> getProgress() async {
     await _waitOpen();
-    return Map<String, Duration>();
+    return <String, Duration>{};
     //return FlutterSoundPlayerPlatform.instance.getProgress(this);
   }
 
@@ -1077,8 +1077,8 @@ class PlaybackDisposition {
   /// you can use this to set initialData with both duration
   /// and postion as 0.
   PlaybackDisposition.zero()
-      : position = Duration(seconds: 0),
-        duration = Duration(seconds: 0);
+      : position = const Duration(seconds: 0),
+        duration = const Duration(seconds: 0);
 
   /// The constructor
   PlaybackDisposition({
