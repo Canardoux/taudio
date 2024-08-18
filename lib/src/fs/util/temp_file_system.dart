@@ -86,6 +86,6 @@ class TempFiles {
 
   ///
   String generateRandomFileName() {
-    return Uuid().toString();
+    return const Uuid().toString();
   }
 }

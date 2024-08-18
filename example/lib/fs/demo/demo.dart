@@ -29,7 +29,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:taudio/taudio.dart';
-import 'package:permission_handler/permission_handler.dart';
+//import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:typed_data';
 
@@ -238,10 +238,10 @@ class _MyAppState extends State<Demo> {
 
   Future<void> openTheRecorder() async {
     if (!kIsWeb) {
-      var status = await Permission.microphone.request();
-      if (status != PermissionStatus.granted) {
-        throw RecordingPermissionException('Microphone permission not granted');
-      }
+      //var status = await Permission.microphone.request();
+      //if (status != PermissionStatus.granted) {
+        //throw RecordingPermissionException('Microphone permission not granted');
+      //}
     }
     await recorderModule.openRecorder();
 
@@ -279,13 +279,15 @@ class _MyAppState extends State<Demo> {
   }
 
   Future<void> copyAssets() async {
-    var dataBuffer =
+   /* var dataBuffer =
         (await rootBundle.load('assets/canardo.png')).buffer.asUint8List();
     var path = '${await playerModule.getResourcePath()}/assets';
     if (!await Directory(path).exists()) {
       await Directory(path).create(recursive: true);
     }
     await File('$path/canardo.png').writeAsBytes(dataBuffer);
+
+    */
   }
 
   @override
@@ -342,11 +344,11 @@ class _MyAppState extends State<Demo> {
     try {
       // Request Microphone permission if needed
       if (!kIsWeb) {
-        var status = await Permission.microphone.request();
-        if (status != PermissionStatus.granted) {
-          throw RecordingPermissionException(
-              'Microphone permission not granted');
-        }
+        //var status = await Permission.microphone.request();
+        //if (status != PermissionStatus.granted) {
+          //throw RecordingPermissionException(
+              //'Microphone permission not granted');
+        //}
       }
       var path = '';
       if (!kIsWeb) {
@@ -358,6 +360,7 @@ class _MyAppState extends State<Demo> {
 
       if (_media == Media.stream) {
         assert(_codec == Codec.pcm16);
+        /*
         if (!kIsWeb) {
           var outputFile = File(path);
           if (outputFile.existsSync()) {
@@ -367,6 +370,8 @@ class _MyAppState extends State<Demo> {
         } else {
           sink = null; // TODO
         }
+
+         */
         recordingDataController = StreamController<Uint8List>();
         _recordingDataSubscription =
             recordingDataController!.stream.listen((buffer) {
@@ -432,13 +437,14 @@ class _MyAppState extends State<Demo> {
   }
 
   Future<bool> fileExists(String path) async {
-    return await File(path).exists();
+    return true; //await File(path).exists();
   }
 
   // In this simple example, we just load a file in memory.This is stupid but just for demonstration  of startPlayerFromBuffer()
   Future<Uint8List?> makeBuffer(String path) async {
-    try {
+    //try {
       if (!await fileExists(path)) return null;
+      /*
       var file = File(path);
       file.openRead();
       var contents = await file.readAsBytes();
@@ -448,6 +454,8 @@ class _MyAppState extends State<Demo> {
       playerModule.logger.e(e);
       return null;
     }
+
+       */
   }
 
   void _addListeners() {
@@ -473,12 +481,16 @@ class _MyAppState extends State<Demo> {
 
   Future<Uint8List> _readFileByte(String filePath) async {
     var myUri = Uri.parse(filePath);
+    /*
     var audioFile = File.fromUri(myUri);
     Uint8List bytes;
     var b = await audioFile.readAsBytes();
     bytes = Uint8List.fromList(b);
     playerModule.logger.d('reading of bytes is completed');
     return bytes;
+
+     */
+    return Uint8List(0);
   }
 
   Future<Uint8List> getAssetData(String path) async {

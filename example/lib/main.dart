@@ -18,8 +18,8 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:taudio_example/td/taudio_examples.dart';
-import 'fs/flutter_sound_examples.dart';
+import 'taudio_examples.dart';
+//import 'flutter_sound_examples.dart';
 
 ///
 //class Example {}
@@ -97,8 +97,8 @@ class _ExamplesHomePageState extends State<ExamplesAppHomePage> {
                   'Flutter Sound examples',
                 ),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const FlutterSoundExamples()));
+                  //Navigator.of(context).push(MaterialPageRoute(
+                  //builder: (context) => const FlutterSoundExamples()));
                 }),
           ),
           Center(

@@ -19,8 +19,7 @@
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'td_simple_playback/td_simple_playback.dart';
-
+import 'td/td_simple_playback/td_simple_playback.dart';
 /*
     This Form is just a driver to call the various Flutter Sound examples.
     Please refer to the examples/README.md and all the examples located under the examples/lib directory.
@@ -58,7 +57,6 @@ class Example {
 ///
 final List<Example> exampleTable = [
   // If you update the following test, please update also the Examples/README.md file and the comment inside the dart file.
-
   Example(
     title: 'simplePlayback',
     subTitle: 'A very simple example',

@@ -16,9 +16,64 @@
  * along with τ.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-class TaudioSource {}
+import 'dart:typed_data' show Uint8List;
 
-class FromUrl extends TaudioSource {
+//import '../../src/dummy.dart'
+//    if (dart.library.html) 'package:web/web.dart'
+//    if (dart.library.io) '../../src/temp.dart';
+import '../../taudio.dart';
+import 'package:http/http.dart' as http;
+import 'package:web/web.dart';
+
+abstract class TaudioSource {
+  late AudioContext context;
+  AudioNode get node;
+  /* ctor */ TaudioSource({required this.context});
+  Future<void> open();
+}
+
+class FromBuffer extends TaudioSource {
+  Future<void?> open() {
+   AudioBuffer audioBuffer = AudioBuffer.from(
+        samples: List<Float32List>.filled(2, pcmData), sampleRate: 48000);
+
+    var n = context.createBufferSource();
+    _node = n;
+    n.buffer = audioBuffer;
+  }
+  Uint8List? buf;
+  late AudioNode _node;
+  /* ctor */ FromBuffer({required super.context, this.buf}) {
+     //audioBuffer.dispose();
+  }
+  AudioNode get node => _node;
+}
+
+class FromAsset {
+  Future<void> open() => Future.value();
+  late AudioNode _node;
+  /* ctor */ FromAsset();
+  AudioNode get node => _node;
+}
+
+class FromUrl extends FromBuffer {
   String path = '';
-  /* ctor */ FromUrl({required String this.path}) {}
+  TaudioCodec codec;
+  //late AudioNode _node;
+  /* ctor */ FromUrl(
+      {required super.context,
+      required String this.path,
+      required TaudioCodec this.codec});
+
+  Future<Uint8List?> fetch() async {
+    final response = await http.get(Uri.parse(path));
+    var audioData = response.bodyBytes
+  }
+    Future<void> open() async {
+      buf = await fetch();
+      return super.open();
+    }
+
+    ;
+  }
 }

@@ -15,13 +15,16 @@ dependencies:
   uuid: any
   path: any
   synchronized: any
-  tauwa:
+  #web: ^1.0.0
+  web: ^1.0.0
+  #tauwa:
     # When depending on this package from a real application you should use:
     #   taudio: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.
-    path: ../tauwa
+    #path: ../tauwa
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:

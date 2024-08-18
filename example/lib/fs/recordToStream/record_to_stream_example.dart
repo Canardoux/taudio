@@ -24,7 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:taudio/taudio.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
+//import 'package:permission_handler/permission_handler.dart';
 
 /*
  * This is an example showing how to record to a Dart Stream.
@@ -61,10 +61,10 @@ class _RecordToStreamExampleState extends State<RecordToStreamExample> {
   int sampleRate = 44100;
 
   Future<void> _openRecorder() async {
-    var status = await Permission.microphone.request();
-    if (status != PermissionStatus.granted) {
-      throw RecordingPermissionException('Microphone permission not granted');
-    }
+    //var status = await Permission.microphone.request();
+    //if (status != PermissionStatus.granted) {
+      //throw RecordingPermissionException('Microphone permission not granted');
+    //}
     await _mRecorder!.openRecorder();
 
     final session = await AudioSession.instance;
@@ -116,6 +116,7 @@ class _RecordToStreamExampleState extends State<RecordToStreamExample> {
     _mRecorder = null;
     super.dispose();
   }
+/*
 
   Future<IOSink> createFile() async {
     var tempDir = await getTemporaryDirectory();
@@ -127,15 +128,17 @@ class _RecordToStreamExampleState extends State<RecordToStreamExample> {
     return outputFile.openWrite();
   }
 
+ */
+
   // ----------------------  Here is the code to record to a Stream ------------
 
   Future<void> record() async {
     assert(_mRecorderIsInited && _mPlayer!.isStopped);
-    var sink = await createFile();
+    //var sink = await createFile();
     var recordingDataController = StreamController<Uint8List>();
     _mRecordingDataSubscription =
         recordingDataController.stream.listen((buffer) {
-      sink.add(buffer);
+      //sink.add(buffer);
     });
     await _mRecorder!.startRecorder(
       toStream: recordingDataController.sink,

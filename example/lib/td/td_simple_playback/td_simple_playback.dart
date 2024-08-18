@@ -46,14 +46,14 @@ class TDSimplePlayback extends StatefulWidget {
 }
 
 class _TDSimplePlayback extends State<TDSimplePlayback> {
-  Taudio _player = Taudio();
+  final Taudio _player = Taudio();
   bool _playerIsInited = false;
 
-  @override
-  void initState() {
-    super.initState();
-    TaudioSource source = FromUrl(path: _exampleAudioFilePathMP3);
-    TaudioDestination destination = OutputDevice.speaker();
+
+  void initTaudio() {
+    FromUrl source =
+    _player.fromUrl(codec: TaudioCodec(), path: _exampleAudioFilePathMP3);
+    TaudioDestination destination = _player.speaker();
     _player
         .open(
       from: source,
@@ -64,6 +64,13 @@ class _TDSimplePlayback extends State<TDSimplePlayback> {
         _playerIsInited = true;
       });
     });
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    initTaudio();
   }
 
   @override

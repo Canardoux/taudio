@@ -24,7 +24,7 @@ import 'package:taudio/taudio.dart';
 import 'dart:typed_data';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:permission_handler/permission_handler.dart';
+//import 'package:permission_handler/permission_handler.dart';
 
 /*
  *
@@ -85,11 +85,11 @@ class _RecorderOnProgressState extends State<RecorderOnProgress> {
   }
 
   Future<void> openTheRecorder() async {
-    if (!kIsWeb) {
-      var status = await Permission.microphone.request();
-      if (status != PermissionStatus.granted) {
-        throw RecordingPermissionException('Microphone permission not granted');
-      }
+    //if (!kIsWeb) {
+      //var status = await Permission.microphone.request();
+      //if (status != PermissionStatus.granted) {
+        //throw RecordingPermissionException('Microphone permission not granted');
+      //}
     }
     await _mRecorder.openRecorder();
     if (!await _mRecorder.isEncoderSupported(_codec) && kIsWeb) {
