@@ -61,6 +61,8 @@ class TaudioCodec {
 class Taudio {
   TaudioState _taudioState = TaudioState.isClosed;
 
+  TaudioSource? source;
+  TaudioDestination? destination;
   AudioContext context = AudioContext();
   /* ctor */ Taudio();
 
@@ -81,13 +83,12 @@ class Taudio {
     //{isBGService = false}
     required TaudioSource from,
     required TaudioDestination to,
-  }) {
-    AudioNode source = from.node;
-    AudioNode destination = to.node;
-    source.connect(destination);
-    return to.open().then((value) {
-      from.open();
-    }).then((value) {});
+  }) async {
+     source = from;
+     destination = to;
+    await to.open();
+    await from.open();
+    from.node.connect(to.node);
   }
 
   Future<void> close() {

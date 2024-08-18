@@ -33,18 +33,17 @@ abstract class TaudioSource {
 }
 
 class FromBuffer extends TaudioSource {
-  Future<void?> open() {
-   AudioBuffer audioBuffer = AudioBuffer.from(
-        samples: List<Float32List>.filled(2, pcmData), sampleRate: 48000);
-
+  Future<void> open() async {
+    //AudioBuffer audioBuffer = await context.decodeAudioData(buf);
     var n = context.createBufferSource();
     _node = n;
-    n.buffer = audioBuffer;
+    //n.buffer = audioBuffer;
   }
+
   Uint8List? buf;
   late AudioNode _node;
   /* ctor */ FromBuffer({required super.context, this.buf}) {
-     //audioBuffer.dispose();
+    //audioBuffer.dispose();
   }
   AudioNode get node => _node;
 }
@@ -66,14 +65,13 @@ class FromUrl extends FromBuffer {
       required TaudioCodec this.codec});
 
   Future<Uint8List?> fetch() async {
-    final response = await http.get(Uri.parse(path));
-    var audioData = response.bodyBytes
+    var f = await http.get(Uri.parse(path));
+    buf = f.bodyBytes;
+    return buf;
   }
-    Future<void> open() async {
-      buf = await fetch();
-      return super.open();
-    }
 
-    ;
+  Future<void> open() async {
+    buf = await fetch();
+    return super.open();
   }
 }
