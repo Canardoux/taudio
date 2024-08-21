@@ -15,7 +15,6 @@ dependencies:
   uuid: any
   path: any
   synchronized: any
-  #web: ^1.0.0
   web: ^1.0.0
   #tauwa:
     # When depending on this package from a real application you should use:
@@ -25,6 +24,7 @@ dependencies:
     # the parent directory to use the current plugin's version.
     #path: ../tauwa
   http: ^1.2.2
+  #fetch_client: ^1.1.2
 
 dev_dependencies:
   flutter_test:

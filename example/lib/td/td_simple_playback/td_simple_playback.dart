@@ -31,8 +31,7 @@ import 'package:taudio/taudio.dart';
  *
  */
 
-const _exampleAudioFilePathMP3 =
-    'https://tau.canardoux.xyz/danku/extract/05.mp3';
+const _exampleAudioFilePathMP3 = 'https://tau.canardoux.xyz/danku/extract/05.mp3';
 
 ///
 typedef Fn = void Function();
@@ -49,24 +48,6 @@ class _TDSimplePlayback extends State<TDSimplePlayback> {
   final Taudio _player = Taudio();
   bool _playerIsInited = false;
 
-
-  void initTaudio() {
-    FromUrl source =
-    _player.fromUrl(codec: TaudioCodec(), path: _exampleAudioFilePathMP3);
-    TaudioDestination destination = _player.speaker();
-    _player
-        .open(
-      from: source,
-      to: destination,
-    )
-        .then((value) {
-      setState(() {
-        _playerIsInited = true;
-      });
-    });
-  }
-
-
   @override
   void initState() {
     super.initState();
@@ -78,7 +59,7 @@ class _TDSimplePlayback extends State<TDSimplePlayback> {
     // Be careful : you must `close` the audio session when you have finished with it.
     _player.close().then((value) {
       setState(() {
-        _playerIsInited = true;
+        _playerIsInited = false;
       });
     });
     super.dispose();
@@ -86,21 +67,28 @@ class _TDSimplePlayback extends State<TDSimplePlayback> {
 
   // -------  Here is the code to playback a remote file -----------------------
 
-  void play() async {
-    _player.rewind().then((value) => _player.play()).then((value) {
+  Future<void> initTaudio() async {
+    TaudioSource source = _player.fromUri(codec: TaudioCodec(), path: _exampleAudioFilePathMP3);
+    TaudioDestination destination = _player.speaker();
+    await _player.open(from: source, to: destination);
+    setState(() {
+      _playerIsInited = true;
+    });
+  }
+
+  Future<void> start() async {
+    _player.rewind().then((value) => _player.start()).then((value) {
       setState(() {});
     });
   }
 
   void stop() {
-    _player.stop().then((value) {
-      setState(() {});
-    });
+    _player.stop();
   }
 
   // --------------------- UI -------------------
 
-  Fn? getPlaybackFn() => (_playerIsInited) ? play : null;
+  Fn? getPlaybackFn() => (_playerIsInited) ? start : null;
 
   @override
   Widget build(BuildContext context) {

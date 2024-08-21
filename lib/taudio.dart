@@ -26,58 +26,81 @@ export 'public/td/td.dart';
     //if (dart.library.html) 'src/permission_handler_web.dart'
     //if (dart.library.io) 'package:permission_handler/permission_handler.dart';
 
+import 'dart:js_interop';
+import 'dart:ui_web';
+
 import 'src/dummy.dart'
     if (dart.library.html) 'package:web/web.dart'
     if (dart.library.io) 'src/temp.dart';
 import 'package:web/web.dart';
 import 'public/td/taudio_source.dart';
 import 'public/td/taudio_destination.dart';
+import 'dart:typed_data' show Uint8List;
+
 
 /// The possible states of the Player.
 enum TaudioState {
   /// Taudio not open or has been closed
   ///
-  isClosed,
+  closed,
 
   /// Taudio is stopped
-  isStopped,
+  stopped,
 
   /// Taudio is playing
-  isPlaying,
+  playing,
 
   /// Taudio is paused
-  isPaused,
+  paused,
 
   /// Taudio is recording
-  isRecording,
+  recording,
 }
 
 typedef TWhenFinished = void Function();
 
 class TaudioCodec {
-  String get type => 'audio/mpeg';
+  //String get type => 'audio/mpeg';
 }
 
+//class CodecPCM32 extends TaudioCodec
+//{
+
+//}
+
 class Taudio {
-  TaudioState _taudioState = TaudioState.isClosed;
+  TaudioState _taudioState = TaudioState.closed;
 
   TaudioSource? source;
   TaudioDestination? destination;
   AudioContext context = AudioContext();
   /* ctor */ Taudio();
 
-  FromUrl fromUrl({required TaudioCodec codec, required String path}) =>
-      FromUrl(context: context, path: path, codec: codec);
+  Future<TaudioBuffer> decode({required  Uint8List buffer, required TaudioCodec codec}) => TaudioBuffer.decode(context: context, buffer: buffer, codec: codec);
+  FromUri fromUri({required TaudioCodec codec, required String path}) =>
+      FromUri(context: context, path: path, codec: codec);
 
   OutputDevice speaker() =>
       OutputDevice(context: context, type: TaudioDeviceType.speaker);
 
-  TaudioState getState() => _taudioState;
-  bool isPlaying() => _taudioState == TaudioState.isPlaying;
-  bool isRecording() => _taudioState == TaudioState.isRecording;
-  bool isOpen() => _taudioState != TaudioState.isClosed;
-  bool isStopped() => _taudioState == TaudioState.isStopped;
-  bool isPaused() => _taudioState == TaudioState.isPaused;
+  //TaudioState getState() => _taudioState;
+  TaudioState getState() {
+    if (context.state == "closed") {
+      return TaudioState.closed;
+    }
+    if (context.state == "suspended") {
+      return TaudioState.stopped;
+    }
+    if (context.state == "running") {
+//TODO
+    }
+    return TaudioState.stopped; // TODO
+  }
+  bool isPlaying() => _taudioState == TaudioState.playing;
+  bool isRecording() => _taudioState == TaudioState.recording;
+  bool isOpen() => _taudioState != TaudioState.closed;
+  bool isStopped() => _taudioState == TaudioState.stopped;
+  bool isPaused() => _taudioState == TaudioState.paused;
 
   Future<void> open({
     //{isBGService = false}
@@ -88,26 +111,34 @@ class Taudio {
      destination = to;
     await to.open();
     await from.open();
-    from.node.connect(to.node);
+    from.node!.connect(to.node!);
   }
 
-  Future<void> close() {
+  Future<void> close()  =>  (context.close()).toDart;
+
+  Future<void> suspend() => (context.suspend()).toDart;
+  Future<void> resume() => (context.resume()).toDart;
+
+  // Future<void> play() => (context.play()).toDart;
+  // Future<void> pause() => (context.pause()).toDart;
+
+  void start() => (source!.node! as AudioScheduledSourceNode).start();
+  void stop() => (source!.node! as AudioScheduledSourceNode).stop();
+
+  Future<void> record() { // TODO
     return Future.value();
   }
 
-  Future<void> play() {
+  Future<void> rewind() { // TODO
     return Future.value();
   }
+}
 
-  Future<void> record() {
-    return Future.value();
-  }
+abstract class TaudioNode
+{
+  late AudioContext context;
+  AudioNode? node;
 
-  Future<void> stop() {
-    return Future.value();
-  }
+  /* ctor */ TaudioNode({required this.context});
 
-  Future<void> rewind() {
-    return Future.value();
-  }
 }

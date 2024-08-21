@@ -16,18 +16,19 @@
  * along with τ.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-//import 'package:web/web.dart';
+
+import '../../taudio.dart';
 
 import '../../src/dummy.dart'
     if (dart.library.html) 'package:web/web.dart'
     if (dart.library.io) '../../src/temp.dart';
 import 'package:web/web.dart';
 
-abstract class TaudioDestination {
-  AudioNode get node;
-  late AudioContext context;
-  /* ctor */ TaudioDestination({required this.context});
-  Future<void> open() => Future.value();
+abstract class TaudioDestination extends TaudioNode {
+  //AudioNode get node;
+  //late AudioContext context
+  /* ctor */ TaudioDestination({required super.context, }) ;
+  /* abstract */ Future<void> open();
 }
 
 enum TaudioDeviceType {
@@ -39,10 +40,12 @@ enum TaudioDeviceType {
 
 class OutputDevice extends TaudioDestination {
   TaudioDeviceType type = TaudioDeviceType.defaultDevice;
+
   /* ctor */ OutputDevice(
       {required super.context, this.type = TaudioDeviceType.defaultDevice});
+
   factory OutputDevice.speaker(AudioContext context) =>
       OutputDevice(context: context, type: TaudioDeviceType.speaker);
-  @override
-  AudioNode get node => context.destination;
+
+  Future<void> open() => Future.value();
 }

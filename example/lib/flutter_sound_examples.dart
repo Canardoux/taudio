@@ -19,22 +19,22 @@
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'demo/demo.dart';
-import 'livePlaybackWithBackPressure/live_playback_with_back_pressure.dart';
-import 'livePlaybackWithoutBackPressure/live_playback_without_back_pressure.dart';
-import 'multi_playback/multi_playback.dart';
-import 'recordToStream/record_to_stream_example.dart';
-import 'dummy_mobile.dart'
+import 'fs/demo/demo.dart';
+import 'fs/livePlaybackWithBackPressure/live_playback_with_back_pressure.dart';
+import 'fs/livePlaybackWithoutBackPressure/live_playback_without_back_pressure.dart';
+import 'fs/multi_playback/multi_playback.dart';
+import 'fs/recordToStream/record_to_stream_example.dart';
+import 'fs/dummy_mobile.dart'
     if (dart.library.js_interop) 'mediaRecorder/media_recorder.dart'; // package:web implementation
-import 'simple_playback/simple_playback.dart';
-import 'simple_recorder/simple_recorder.dart';
-import 'soundEffect/sound_effect.dart';
-import 'loglevel/loglevel.dart';
-import 'volume_control/volume_control.dart';
-import 'speed_control/speed_control.dart';
-import 'player_onProgress/player_on_progress.dart';
-import 'recorder_onProgress/recorder_on_progress.dart';
-import 'seek/seek.dart';
+import 'fs/simple_playback/simple_playback.dart';
+import 'fs/simple_recorder/simple_recorder.dart';
+import 'fs/soundEffect/sound_effect.dart';
+import 'fs/loglevel/loglevel.dart';
+import 'fs/volume_control/volume_control.dart';
+import 'fs/speed_control/speed_control.dart';
+import 'fs/player_onProgress/player_on_progress.dart';
+import 'fs/recorder_onProgress/recorder_on_progress.dart';
+import 'fs/seek/seek.dart';
 
 /*
     This Form is just a driver to call the various Flutter Sound examples.
