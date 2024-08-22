@@ -26,7 +26,10 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../../taudio.dart';
 import 'package:http/http.dart' as http;
 //import 'package:fetch_client/fetch_client.dart' as http;
-import 'package:web/web.dart' hide Float32List;
+import '../../src/dummy.dart' 
+  if (dart.library.html) '../../src/taudio_web.dart'
+  if (dart.library.io) '../../src/taudio_nat.dart';
+//import 'package:web/web.dart' hide Float32List;
 
 abstract class TaudioSource extends TaudioNode {
   /* ctor */ TaudioSource({required super.context,});

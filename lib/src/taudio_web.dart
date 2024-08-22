@@ -16,14 +16,4 @@
  * along with τ.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-enum PermissionStatus {
-  granted,
-}
-
-class Toto {
-  PermissionStatus request() => PermissionStatus.granted;
-}
-
-class Permission {
-  Toto microphone = Toto();
-}
+export 'package:web/web.dart' hide Float32List;
