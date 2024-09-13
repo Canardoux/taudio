@@ -32,7 +32,7 @@ import 'package:logger/logger.dart' show Level, Logger;
 //import 'package:path_provider/path_provider.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:flutter/foundation.dart' as Foundation;
-import 'fs.dart';
+import '../../taudio.dart';
 //import 'package:flutter/src/services/platform_channel.dart';
 //import '../flutter_sound.dart';
 

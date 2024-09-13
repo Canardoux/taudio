@@ -34,16 +34,10 @@
 /// {@category Main}
 library tau;
 
-export 'flutter_sound_player.dart';
-export 'flutter_sound_recorder.dart';
-///
-///library util;
-export 'util/flutter_sound_helper.dart';
-
 import 'dart:typed_data' show Uint8List;
 import 'package:logger/logger.dart' show Level, Logger;
-import 'flutter_sound_player.dart';
-import 'flutter_sound_recorder.dart';
+import 'src/fs/flutter_sound_player.dart';
+import 'src/fs/flutter_sound_recorder.dart';
 
 
 enum Codec {

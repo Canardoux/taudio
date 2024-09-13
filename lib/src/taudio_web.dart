@@ -16,4 +16,5 @@
  * along with τ.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export 'package:web/web.dart' hide Float32List;
+export 'package:web/web.dart' hide Float32List,Text;
+export 'dart:js_interop';

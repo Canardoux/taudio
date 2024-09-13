@@ -27,7 +27,7 @@ import 'dart:typed_data';
 import 'package:logger/logger.dart' show Level, Logger;
 import 'package:path/path.dart' as p;
 import 'package:synchronized/synchronized.dart';
-import 'fs.dart';
+import '../../taudio.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
 

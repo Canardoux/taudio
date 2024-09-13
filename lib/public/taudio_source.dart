@@ -16,7 +16,10 @@
  * along with τ.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'dart:js_interop';
+//import 'dart:js_interop';
+import 'package:taudio/src/taudio_nat.dart';
+
+import '../../taudio.dart';
 import 'dart:typed_data' show Uint8List, Float32List;
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -34,87 +37,6 @@ import '../../src/dummy.dart'
 abstract class TaudioSource extends TaudioNode {
   /* ctor */ TaudioSource({required super.context,});
   /* abstract */ Future<void> open();
-}
-
-
-class TaudioBuffer {
-  late AudioBuffer audioBuffer;
-  late AudioContext context;
-
-  int get numberOfChannels => audioBuffer.numberOfChannels;
-
-  int get sampleRate => audioBuffer.sampleRate.floor();
-
-  double get duration => audioBuffer.duration;
-
-  int get length => audioBuffer.length;
-
-  Float32List getChannelData({ required int channelNumber }) =>
-      audioBuffer.getChannelData(channelNumber).toDart;
-
-  //void copyToChannel({ Float32List source, int channel }) { audioBuffer.copyToChannel(source, channel); }
-  //void copyTFromhannel({ Float32List destination, int channel }) { audioBuffer.copyfromChannel(destination, channel); }
-
-
-  /* ctor */
-  TaudioBuffer.fromPCM32({ required this.context, required int sampleRate, required List<Float32List> data })
-  {
-          var numberOfChannels = data.length;
-          if (numberOfChannels == 0)
-          {
-            throw Exception('Number of channels is 0');
-          }
-    Float32List firstChannel = data[0];
-    int length = firstChannel.length;
-    for (int i = 1; i < numberOfChannels; ++i)
-    {
-      if (data[i].length != length)
-      {
-        throw Exception('Data length for each channel are not same');
-      }
-    }
-    audioBuffer = context.createBuffer(numberOfChannels, length, sampleRate);
-    for (int i = 0; i < numberOfChannels; ++i)
-    {
-      audioBuffer.copyToChannel(data[i].toJS, i);
-    }
-  }
-
-  /* ctor */
-  TaudioBuffer({ required this.context, required this.audioBuffer });
-
-  static Future<TaudioBuffer> decode({ required AudioContext context, required Uint8List buffer, required TaudioCodec codec }) async {
-    // Codec is unused !!!!
-    var b = context.decodeAudioData(buffer.buffer.toJS);
-    var x = await b.toDart;
-    return TaudioBuffer(context: context, audioBuffer: x);
-    //taudioBuffer = TaudioBuffer(context: context, audioBuffer: x);
-  }
-
-  static Future<AudioBufferSourceNode> setBuf({ required AudioContext context, required Uint8List buffer, required TaudioCodec codec }) async
-  {
-    TaudioBuffer taudioBuffer = await TaudioBuffer.decode(context: context, buffer: buffer, codec: codec);
-    AudioBufferSourceNode n = context.createBufferSource();
-    n.buffer = taudioBuffer!.audioBuffer;
-    return n;
-  }
-
-}
-
-abstract class taudioBufferSource extends TaudioSource {
-  TaudioBuffer? taudioBuffer;
-
-  /* ctor */ taudioBufferSource({ required super.context}) ;
-
-  //Future<void> decode({ required Uint8List buffer, required TaudioCodec codec }) => TaudioBuffer.decode(context: context, buffer: buffer, codec: codec);
-
-  Future<TaudioBuffer> setBuf({ required Uint8List buffer, required TaudioCodec codec }) async {
-    taudioBuffer = await TaudioBuffer.decode(context: context, buffer: buffer, codec: codec);
-    AudioBufferSourceNode n = context.createBufferSource();
-    n.buffer = taudioBuffer!.audioBuffer;
-    node = n;
-    return taudioBuffer!;
-  }
 }
 
 

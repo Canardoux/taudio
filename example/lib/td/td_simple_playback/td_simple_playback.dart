@@ -68,7 +68,7 @@ class _TDSimplePlayback extends State<TDSimplePlayback> {
   // -------  Here is the code to playback a remote file -----------------------
 
   Future<void> initTaudio() async {
-    TaudioSource source = _player.fromUri(codec: TaudioCodec(), path: _exampleAudioFilePathMP3);
+    TaudioSource source = _player.fromUri(codec: AAC_MP4(), path: _exampleAudioFilePathMP3);
     TaudioDestination destination = _player.speaker();
     await _player.open(from: source, to: destination);
     setState(() {
