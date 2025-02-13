@@ -15,7 +15,7 @@ echo '**********************  pub Taudio **********************'
 bin/setver.sh $VERSION
 bin/reldev.sh REL
 
-cp -v ../tau_doc/pages/td/README.md .
+cp -v ../tau_doc/pages/taudio/README.md .
 gsed -i '1,6d' README.md
 gsed -i "/^\"\%}$/d" README.md
 gsed -i "/^{\% include/d" README.md
@@ -51,7 +51,7 @@ cd ..
 dart doc .
 
 # Perhaps could be done in `setver.sh` instead of here
-gsed -i  "s/^\( *version: \).*/\1$VERSION/"                                  ../tau_doc/_data/sidebars/Taudio_sidebar.yml
+gsed -i  "s/^\( *version: \).*/\1$VERSION/"                                  ../tau_doc/_data/sidebars/td_sidebar.yml
 gsed -i  "s/^ETAU_VERSION:.*/TAUDIO_VERSION: $VERSION/"                        ../tau_doc/_config.yml
 
 
