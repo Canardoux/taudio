@@ -1,6 +1,6 @@
-# tau_war_example
+# taudio_example
 
-Demonstrates how to use the tau_war plugin.
+Demonstrates how to use the taudio plugin.
 
 ## Getting Started
 
