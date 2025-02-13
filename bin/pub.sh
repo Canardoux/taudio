@@ -73,6 +73,9 @@ if [ $? -ne 0 ]; then
     exit -1
 fi
 
+read -p "Press enter to continue"
+
+
 cd example
 flutter build web --release
 if [ $? -ne 0 ]; then
@@ -88,6 +91,5 @@ cd ../taudio
 
 
 
-#read -p "Press enter to continue"
 
 echo 'E.O.J for pub Taudio'
