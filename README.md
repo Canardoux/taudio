@@ -1,9 +1,3 @@
-## License
-
-- Flutter Sound is copyrighted by Dooboolab (2018, 2019, 2020, 2021).
-- Flutter Sound is released under the permissive Mozilla license which has a **weak** *copyleft* clause: if you modify some of Flutter Sound code you must publish your modifications under the MPL license too. But you may publish your App with any license you want. Even a Proprietary/Close Sources License (shame on you!).
-
-## Help
 
 I greatly appreciate any contributions to the project which can be as simple as providing feedback on the API or documentation.
 

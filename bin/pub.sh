@@ -55,11 +55,6 @@ gsed -i  "s/^\( *version: \).*/\1$VERSION/"                                  ../
 gsed -i  "s/^ETAU_VERSION:.*/TAUDIO_VERSION: $VERSION/"                        ../tau_doc/_config.yml
 
 
-cd ../tau_doc
-bin/pub.sh
-cd ../taudio
-
-
 
 echo 'git push'
 git add .
@@ -85,6 +80,12 @@ if [ $? -ne 0 ]; then
     exit -1
 fi
 cd ..
+
+
+cd ../tau_doc
+bin/pub.sh
+cd ../taudio
+
 
 
 #read -p "Press enter to continue"
