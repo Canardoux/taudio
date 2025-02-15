@@ -31,7 +31,7 @@ import 'package:taudio/taudio.dart';
  *
  */
 
-const _exampleAudioFilePathMP3 = 'https://tau.canardoux.xyz/danku/extract/05.mp3';
+const _exampleAudioFilePathMP3 = 'https://tau-ver.canardoux.xyz/tau/extract/05.mp3';
 
 ///
 typedef Fn = void Function();
