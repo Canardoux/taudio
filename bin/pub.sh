@@ -70,7 +70,7 @@ fi
 flutter pub publish
 if [ $? -ne 0 ]; then
     echo "Error: flutter pub publish[Taudio]"
-    exit -1
+#    exit -1
 fi
 
 read -p "Press enter to continue"
@@ -80,7 +80,7 @@ cd example
 flutter build web --release
 if [ $? -ne 0 ]; then
     echo "Error"
-    exit -1
+#    exit -1
 fi
 cd ..
 
