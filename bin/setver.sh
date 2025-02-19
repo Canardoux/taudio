@@ -24,6 +24,7 @@ gsed -i  "s/^\( *## \).*$/\1$VERSION/"                                          
 
 #gsed -i  "s/^\( *taudio: *#* *\^*\).*$/\1$VERSION/"                                    example/pubspec.yaml
 gsed -i  "s/^\( *taudio: *#* *\^*\).*$/\1$VERSION/"                                    ../etau/example/pubspec.yaml
+gsed -i  "s/^title: .*$/title: Taudio - $VERSION/"                                               ../taudio-doc/index.md
 #gsed -i  "s/^\( *tau_web: *#* *\^*\).*$/\1$VERSION/"                                    ../etau/pubspec.yaml
 #gsed -i  "s/^\( *tau_web: *#* *\^*\).*$/\1$VERSION/"                                    ../flutter_sound/example/pubspec.yaml
 #gsed -i  "s/^\( *tau_web: *#* *\^*\).*$/\1$VERSION/"                                    ../flutter_sound/pubspec.yaml

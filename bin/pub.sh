@@ -15,10 +15,10 @@ echo '**********************  pub Taudio **********************'
 bin/setver.sh $VERSION
 bin/reldev.sh REL
 
-cp -v ../tau_doc/pages/taudio/README.md .
-gsed -i '1,5d' README.md
-gsed -i "/^\"\%}$/d" README.md
-gsed -i "/^{\% include/d" README.md
+cp -v ../taudio-doc/index.md README.md
+gsed -i '1,6d' README.md
+#gsed -i "/^\"\%}$/d" README.md
+#gsed -i "/^{\% include/d" README.md
 
 flutter analyze lib
 if [ $? -ne 0 ]; then
@@ -51,8 +51,8 @@ cd ..
 dart doc .
 
 # Perhaps could be done in `setver.sh` instead of here
-gsed -i  "s/^\( *version: \).*/\1$VERSION/"                                  ../tau_doc/_data/sidebars/td_sidebar.yml
-gsed -i  "s/^ETAU_VERSION:.*/TAUDIO_VERSION: $VERSION/"                        ../tau_doc/_config.yml
+#gsed -i  "s/^\( *version: \).*/\1$VERSION/"                                  ../tau_doc/_data/sidebars/td_sidebar.yml
+#gsed -i  "s/^ETAU_VERSION:.*/TAUDIO_VERSION: $VERSION/"                        ../tau_doc/_config.yml
 
 
 
@@ -85,7 +85,7 @@ fi
 cd ..
 
 
-cd ../tau_doc
+cd ../taudio-doc
 bin/pub.sh
 cd ../taudio
 
