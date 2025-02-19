@@ -1,5 +1,5 @@
 name: taudio
-version: 0.1.2
+version: 0.17.7
 description: 'Flutter Sound v 10.0. Wrapper above `Etau`. Member of the `Tau` family. Europe Stands With Ukraine. Pray for Ukraine. Audio player, audio recorder.'
 #author: canardoux<larpoux@gmail.com>
 homepage: https://tau-ver.canardoux.xyz/taudio-README.html
@@ -24,7 +24,7 @@ dependencies:
   http: ^1.2.2
 
 # ============================================================================
-  etau: ^5.5.5
+  etau: ^0.17.7
 #    path: ../etau # etau Dir
 # ============================================================================
 
