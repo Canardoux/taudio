@@ -70,7 +70,7 @@ fi
 flutter pub publish
 if [ $? -ne 0 ]; then
     echo "Error: flutter pub publish[Taudio]"
-    exit -1
+#    exit -1
 fi
 
 read -p "Press enter to continue"
