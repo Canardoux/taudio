@@ -15,8 +15,8 @@ echo '**********************  pub Taudio **********************'
 bin/setver.sh $VERSION
 bin/reldev.sh REL
 
-cp -v ../taudio-doc/index.md README.md
-gsed -i '1,6d' README.md
+#cp -v ../taudio-doc/index.md README.md
+#gsed -i '1,6d' README.md
 #gsed -i "/^\"\%}$/d" README.md
 #gsed -i "/^{\% include/d" README.md
 

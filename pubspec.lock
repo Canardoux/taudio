@@ -37,10 +37,10 @@ packages:
     dependency: "direct main"
     description:
       name: etau
-      sha256: "7ac988ae528b7f3014c54841c97f90153ec28a73b445c54d988eeacc06998466"
+      sha256: "8780546b07f4eb153456ba103d3f933a19783268c50ff461b1037ca9e4cc639a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.17.7"
+    version: "0.17.9"
   ffi:
     dependency: transitive
     description:
