@@ -69,10 +69,10 @@ packages:
     dependency: transitive
     description:
       name: etau
-      sha256: e99e7c7bcf352efbc94ce963a5b03796501c2eef8c5a593d1b39d2a872c54d4c
+      sha256: a5d252aae9b6e0194f282bf3b6d066a9a8ce1483bf4fcf59a19a4c3418cf6b39
       url: "https://pub.dev"
     source: hosted
-    version: "0.17.12"
+    version: "0.17.14"
   fake_async:
     dependency: transitive
     description:
@@ -410,7 +410,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.17.12"
+    version: "0.17.14"
   term_glyph:
     dependency: transitive
     description:

@@ -27,7 +27,7 @@
     },
     {
       "name": "etau",
-      "rootUri": "file:///Volumes/mac-H/larpoux/.pub-cache/hosted/pub.dev/etau-0.17.12",
+      "rootUri": "file:///Volumes/mac-H/larpoux/.pub-cache/hosted/pub.dev/etau-0.17.14",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -224,7 +224,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2025-02-20T09:27:48.311195Z",
+  "generated": "2025-02-20T10:30:56.016769Z",
   "generator": "pub",
   "generatorVersion": "3.6.2",
   "flutterRoot": "file:///Volumes/mac-H/larpoux/flutter",
