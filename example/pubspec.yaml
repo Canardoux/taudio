@@ -1,12 +1,20 @@
-name: taudio_example
-description: "Demonstrates how to use the taudio plugin."
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.17.14
+name: TaudioExamples
+description: Driver for the various Taudio examples
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# Read more about versioning at semver.org.
+version: 0.0.1
+
+homepage: https://github.com/canardoux/flutter_sound/blob/master/flutter_sound/
+
 
 environment:
-  sdk: '>=3.4.4 <4.0.0'
+  sdk: ^3.3.0
+  flutter: '>=3.3.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -17,33 +25,45 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  path_provider: ^2.0.2
-  #permission_handler: ^11.3.0
-  path: ^1.6.4
-  intl: ^0.19.0
-  audio_session: ^0.1.6
-  logger: ^2.0.2
-  #web: ^1.0.0
-  uuid: any
-  synchronized: any
-  #flutter_inappwebview: 6.0.0
-  
 
-  taudio: # 
-    # When depending on this package from a real application you should use:
-    #   taudio: ^x.y.z
-    # See https://dart.dev/tools/pub/dependencies#version-constraints
-    # The example app is bundled with the plugin so we use a path dependency on
-    # the parent directory to use the current plugin's version.
-    path: ../
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
 
+
+# ============================================================================
+# The following instructions are just for developing/debugging Flutter Sound
+# Do not put them in a real App
+  ##flutter_sound_platform_interface: # 9.26.0
+    ##path: ../../flutter_sound_platform_interface
+
+  flutter_sound_web: # 9.26.0
+    path: ../../flutter_sound_web # flutter_sound_web Dir
+    
+  taudio: # ^9.26.0
+    path: ../ # Taudio Dir
+
+##  etau: # ^0.0.14-alpha.5
+##    path: ../../../tau/etau # etau Dir
+
+##  tau_web: # ^0.0.14-alpha.5
+##    path: ../../../tau/tau_web # tau_web Dir
+# ============================================================================
+
+#  flutter_sound_platform_interface: ^9.26.0
+
+  path_provider: ^2.0.2
+  permission_handler: ^11.3.0
+  path: ^1.6.4
+  intl: ^0.19.0
+  just_audio: ^0.9.11
+  audio_session: ^0.1.6
+  logger: ^2.0.2
+
+
+
 dev_dependencies:
-  integration_test:
-    sdk: flutter
   flutter_test:
     sdk: flutter
 
@@ -64,6 +84,40 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+  - res/icons/ic_play.png
+  - res/icons/ic_play_disabled.png
+  - res/icons/2.0x/ic_play.png
+  - res/icons/3.0x/ic_play.png
+  - res/icons/ic_stop.png
+  - res/icons/ic_stop_disabled.png
+  - res/icons/2.0x/ic_stop.png
+  - res/icons/3.0x/ic_stop.png
+  - res/icons/ic_pause.png
+  - res/icons/ic_pause_disabled.png
+  - res/icons/2.0x/ic_pause.png
+  - res/icons/3.0x/ic_pause.png
+  - res/icons/ic_mic.png
+  - res/icons/ic_mic_disabled.png
+  - res/icons/2.0x/ic_mic.png
+  - res/icons/3.0x/ic_mic.png
+  - res/icons/ic_volume_down.png
+  - res/icons/2.0x/ic_volume_down.png
+  - res/icons/3.0x/ic_volume_down.png
+  - res/icons/ic_volume_up.png
+  - res/icons/2.0x/ic_volume_up.png
+  - res/icons/3.0x/ic_volume_up.png
+
+  - assets/
+  - assets/samples/
+  - assets/noises/
+  #- assets/extract/
+
+
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

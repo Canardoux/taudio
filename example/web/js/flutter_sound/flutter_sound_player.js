@@ -1,0 +1,1 @@
+../../../../../flutter_sound_web/src/flutter_sound_player.js
