@@ -142,19 +142,19 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
 
   ///
   StreamSubscription<Food>?
-      _foodStreamSubscription; // ignore: cancel_subscriptions
+  _foodStreamSubscription; // ignore: cancel_subscriptions
 
   //
   StreamSubscription<List<Float32List>>?
-      _f32StreamSubscription; // ignore: cancel_subscriptions
+  _f32StreamSubscription; // ignore: cancel_subscriptions
 
   //
   StreamSubscription<List<Int16List>>?
-      _int16StreamSubscription; // ignore: cancel_subscriptions
+  _int16StreamSubscription; // ignore: cancel_subscriptions
 
   //
   StreamSubscription<Uint8List>?
-      _uint8StreamSubscription; // ignore: cancel_subscriptions
+  _uint8StreamSubscription; // ignore: cancel_subscriptions
 
   StreamController<Food>? _foodStreamController; //ignore: close_sinks
 
@@ -244,9 +244,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     if (_needSomeFoodCompleter != null &&
         !_needSomeFoodCompleter!.isCompleted) {
       // On flutter Web we can receive many 'needSomeFood' events
-      _needSomeFoodCompleter?.complete(
-        ln,
-      );
+      _needSomeFoodCompleter?.complete(ln);
     } //The completer is completed when the device accept new data
   }
 
@@ -1341,15 +1339,15 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       );
 
        */
-      var state =
-          await FlutterSoundPlayerPlatform.instance.startPlayerFromStream(
-        this,
-        codec: codec,
-        interleaved: interleaved,
-        numChannels: numChannels,
-        sampleRate: sampleRate,
-        bufferSize: bufferSize,
-      );
+      var state = await FlutterSoundPlayerPlatform.instance
+          .startPlayerFromStream(
+            this,
+            codec: codec,
+            interleaved: interleaved,
+            numChannels: numChannels,
+            sampleRate: sampleRate,
+            bufferSize: bufferSize,
+          );
       _playerState = PlayerState.values[state];
     } on Exception {
       _startPlayerCompleter = null;
@@ -1491,16 +1489,20 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     }
     if (buffer.length != numChannels) {
       logger.e(
-          'feedF32FromStream() : buffer length (${buffer.length}) != the number of channels ($numChannels)');
+        'feedF32FromStream() : buffer length (${buffer.length}) != the number of channels ($numChannels)',
+      );
       throw Exception(
-          'feedF32FromStream() : buffer length (${buffer.length}) != the number of channels ($numChannels)');
+        'feedF32FromStream() : buffer length (${buffer.length}) != the number of channels ($numChannels)',
+      );
     }
     for (int channel = 1; channel < numChannels; ++channel) {
       if (buffer[channel].length != buffer[0].length) {
         logger.e(
-            'feedF32FromStream() : buffer length[0] (${buffer[0].length}) != the number of channels ($numChannels)');
+          'feedF32FromStream() : buffer length[0] (${buffer[0].length}) != the number of channels ($numChannels)',
+        );
         throw Exception(
-            'feedF32FromStream() : buffer length[0] (${buffer.length}) != buffer[$channel].length (${buffer[channel].length})');
+          'feedF32FromStream() : buffer length[0] (${buffer.length}) != buffer[$channel].length (${buffer[channel].length})',
+        );
       }
     }
 
@@ -1595,16 +1597,20 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     }
     if (buffer.length != numChannels) {
       logger.e(
-          'feedInt16FromStream() : buffer length (${buffer.length}) != the number of channels ($numChannels)');
+        'feedInt16FromStream() : buffer length (${buffer.length}) != the number of channels ($numChannels)',
+      );
       throw Exception(
-          'feedInt16FromStream() : buffer length (${buffer.length}) != the number of channels ($numChannels)');
+        'feedInt16FromStream() : buffer length (${buffer.length}) != the number of channels ($numChannels)',
+      );
     }
     for (int channel = 1; channel < numChannels; ++channel) {
       if (buffer[channel].length != buffer[0].length) {
         logger.e(
-            'feedInt16FromStream() : buffer length[0] (${buffer[0].length}) != the number of channels ($numChannels)');
+          'feedInt16FromStream() : buffer length[0] (${buffer[0].length}) != the number of channels ($numChannels)',
+        );
         throw Exception(
-            'feedInt16FromStream() : buffer length[0] (${buffer.length}) != buffer[$channel].length (${buffer[channel].length})');
+          'feedInt16FromStream() : buffer length[0] (${buffer.length}) != buffer[$channel].length (${buffer[channel].length})',
+        );
       }
     }
 
@@ -1689,15 +1695,19 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
 
     if (codec != Codec.pcmFloat32 && codec != Codec.pcm16) {
       logger.e(
-          'feedUint8FromStream() : Cannot feed on a Codec <> pcmFloat32 or pcm16');
+        'feedUint8FromStream() : Cannot feed on a Codec <> pcmFloat32 or pcm16',
+      );
       throw Exception(
-          'feedUint8FromStream() : Cannot feed on a Codec <> pcmFloat32 or pcm16');
+        'feedUint8FromStream() : Cannot feed on a Codec <> pcmFloat32 or pcm16',
+      );
     }
     if (!interleaved) {
       logger.e(
-          'feedUint8FromStream() : Cannot feed with UInt8 with non interleaved mode');
+        'feedUint8FromStream() : Cannot feed with UInt8 with non interleaved mode',
+      );
       throw Exception(
-          'feedUint8FromStream() : Cannot feed with UInt8 with non interleaved mode');
+        'feedUint8FromStream() : Cannot feed with UInt8 with non interleaved mode',
+      );
     }
     int s = 2;
     if (codec == Codec.pcmFloat32) {
@@ -1708,9 +1718,11 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
         (buffer.length.toDouble()) / (s * numChannels.toDouble()).round();
     if (n1 != n2) {
       logger.e(
-          'feedUint8FromStream() : buffer length (${buffer.length}) is not a multiple of number of channels * $s ($numChannels)');
+        'feedUint8FromStream() : buffer length (${buffer.length}) is not a multiple of number of channels * $s ($numChannels)',
+      );
       throw Exception(
-          'feedUint8FromStream() : buffer length (${buffer.length}) is not a multiple of number of channels * $s($numChannels)');
+        'feedUint8FromStream() : buffer length (${buffer.length}) is not a multiple of number of channels * $s($numChannels)',
+      );
     }
 
     return _feed(buffer);
@@ -1879,8 +1891,9 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     try {
       _pausePlayerCompleter = Completer<void>();
       completer = _pausePlayerCompleter;
-      _playerState = PlayerState
-          .values[await FlutterSoundPlayerPlatform.instance.pausePlayer(this)];
+      _playerState =
+          PlayerState.values[await FlutterSoundPlayerPlatform.instance
+              .pausePlayer(this)];
       //if (_playerState != PlayerState.isPaused) {
       //throw _PlayerRunningException(
       //'Player is not paused.'); // I am not sure that it is good to throw an exception here
@@ -2146,8 +2159,8 @@ class PlaybackDisposition {
   /// you can use this to set initialData with both duration
   /// and postion as 0.
   PlaybackDisposition.zero()
-      : position = Duration(seconds: 0),
-        duration = Duration(seconds: 0);
+    : position = Duration(seconds: 0),
+      duration = Duration(seconds: 0);
 
   /// The constructor
   PlaybackDisposition({

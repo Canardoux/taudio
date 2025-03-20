@@ -10,6 +10,14 @@ VERSION=$1
 VERSION_CODE=${VERSION#./}
 VERSION_CODE=${VERSION_CODE#+/}
 
+cd ../flutter_sound_web
+git checkout main
+cd ../flutter_sound_platform_interface
+git checkout main
+cd ../flutter_sound_core
+git checkout master
+cd ../taudio
+
 bin/setver.sh $VERSION
 bin/reldev.sh REL
 
@@ -17,7 +25,7 @@ bin/reldev.sh REL
 #gsed -i '1,5d' README.md
 #gsed -i "/^\"\%}$/d" README.md
 #gsed -i "/^{\% include/d" README.md
-cp -v README.md .github
+#cp -v README.md .github
 
 flutter analyze lib
 if [ $? -ne 0 ]; then
@@ -32,6 +40,7 @@ fi
 
 rm -rf _*.tgz
  
+ # ------------------------------------------------------------------------------------
 cd ../flutter_sound_platform_interface/    
 #flutter clean
 #flutter pub get
@@ -53,7 +62,7 @@ if [ $? -ne 0 ]; then
     #!!!!!exit -1
 fi
 read -p "Press enter to continue"
-cd ../flutter_sound
+cd ../taudio
 
 echo '--------------------------------------------------------------------------------'
 
@@ -77,7 +86,7 @@ if [ $? -ne 0 ]; then
     echo "Error: flutter pub publish[flutter_sound_web]"
     #!!!!!!exit -1
 fi
-cd ../flutter_sound
+cd ../taudio
 
 
 echo '--------------------------------------------------------------------------------'
@@ -91,7 +100,7 @@ if [ ! -z "$VERSION" ]; then
     git tag -f $VERSION
     git push  -f origin $VERSION
 fi
-cd ../flutter_sound
+cd ../taudio
 
 cd ../flutter_sound_web
 git add .
@@ -102,8 +111,9 @@ if [ ! -z "$VERSION" ]; then
     git tag -f $VERSION
     git push  -f origin $VERSION
 fi
-cd ../flutter_sound
+cd ../taudio
 
+# ----------------------------------------------------------------------------------------
 
 git add .
 git commit -m "TAU : Version $VERSION"
@@ -122,7 +132,7 @@ if [ $? -ne 0 ]; then
     echo "Error: trunk push flutter_sound_core.podspec[flutter_sound_core]"
     #!!!!!exit -1
 fi
-cd ../flutter_sound
+cd ../taudio
 
 echo '--------------------------------------------------------------------------------'
 
@@ -133,7 +143,7 @@ if [ $? -ne 0 ]; then
     #!!!!!exit -1
 fi
 
-cd ../flutter_sound
+cd ../taudio
  
 echo '--------------------------------------------------------------------------------'
 
@@ -141,7 +151,7 @@ read -p "Press enter to continue"
 
 flutter pub publish
 if [ $? -ne 0 ]; then
-    echo "Error: flutter pub publish[flutter_sound]"
+    echo "Error: flutter pub publish[taudio]"
    #!!!!!!exit -1
 fi
 
@@ -151,12 +161,12 @@ echo '--------------------------------------------------------------------------
 
 flutter analyze lib
 if [ $? -ne 0 ]; then
-    echo "Error: analyze flutter_sound/lib"
+    echo "Error: analyze taudio/lib"
     #!!!!!!!!!exit -1
 fi
 dart format lib
 if [ $? -ne 0 ]; then
-    echo "Error: format flutter_sound/lib"
+    echo "Error: format taudio/lib"
     exit -1
 fi
 dart format  example/lib
@@ -166,12 +176,12 @@ dart format  example/lib
 #flutter pub get
 flutter analyze lib
 if [ $? -ne 0 ]; then
-    echo "Error: analyze flutter_sound/lib"
+    echo "Error: analyze taudio/lib"
     #!!!!!!!!!!!exit -1
 fi
 dart format lib
 if [ $? -ne 0 ]; then
-    echo "Error: format flutter_sound/lib"
+    echo "Error: format taudio/lib"
     exit -1
 fi
 
@@ -179,7 +189,7 @@ fi
 rm -rf doc/api
 dart doc .
 if [ $? -ne 0 ]; then
-    echo "Error: dart doc flutter_sound/lib"
+    echo "Error: dart doc taudio/lib"
     exit -1
 fi
 
@@ -187,7 +197,7 @@ fi
 cd example
 flutter analyze lib
 if [ $? -ne 0 ]; then
-    echo "Error: analyze flutter_sound/example/lib"
+    echo "Error: analyze taudio/example/lib"
     #!!!!!exit -1
 fi
 cd ..
@@ -212,14 +222,14 @@ cd ../..
 cd example
 flutter build ios --release
 if [ $? -ne 0 ]; then
-    echo "Error: flutter build flutter_sound/example/ios"
+    echo "Error: flutter build taudio/example/ios"
     exit -1
 fi
 
 # Bug in flutter tools : if "flutter build --release" we must first "--debug" and then "--profile" before "--release"
 flutter build apk --release
 if [ $? -ne 0 ]; then
-    echo "Error: flutter build flutter_sound/example/apk"
+    echo "Error: flutter build taudio/example/apk"
     exit -1
 fi
 
@@ -241,13 +251,13 @@ cd ..
 #bin/pub.sh
 #cd ../etau
 
-cd ../fs-doc
+cd ../taudio-doc
 bin/pub.sh $VERSION
 if [ $? -ne 0 ]; then
     echo "Error"
     exit -1
 fi
-cd ../flutter_sound
+cd ../taudio
 
 
 cd ../flutter_sound_core
@@ -283,7 +293,7 @@ if [ ! -z "$VERSION" ]; then
         git tag -f $VERSION
         git push  -f origin $VERSION
 fi
-cd ../flutter_sound
+cd ../taudio
 
 echo 'E.O.J'
 exit 0

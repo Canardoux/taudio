@@ -26,24 +26,22 @@ import '../../src/dummy.dart'
 abstract class TaudioDestination extends TaudioNode {
   //AudioNode get node;
   //late AudioContext context
-  /* ctor */ TaudioDestination({
-    required super.context,
-  });
-  /* abstract */ Future<void> open();
+  /* ctor */
+  TaudioDestination({required super.context});
+  /* abstract */
+  Future<void> open();
 }
 
-enum TaudioDeviceType {
-  defaultDevice,
-  speaker,
-  earPhone,
-  blueToothHeadPhone,
-}
+enum TaudioDeviceType { defaultDevice, speaker, earPhone, blueToothHeadPhone }
 
 class OutputDevice extends TaudioDestination {
   TaudioDeviceType type = TaudioDeviceType.defaultDevice;
 
-  /* ctor */ OutputDevice(
-      {required super.context, this.type = TaudioDeviceType.defaultDevice});
+  /* ctor */
+  OutputDevice({
+    required super.context,
+    this.type = TaudioDeviceType.defaultDevice,
+  });
 
   factory OutputDevice.speaker(AudioContext context) =>
       OutputDevice(context: context, type: TaudioDeviceType.speaker);

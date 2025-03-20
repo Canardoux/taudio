@@ -32,10 +32,10 @@ import '../../src/dummy.dart'
 //import 'package:web/web.dart' hide Float32List;
 
 abstract class TaudioSource extends TaudioNode {
-  /* ctor */ TaudioSource({
-    required super.context,
-  });
-  /* abstract */ Future<void> open();
+  /* ctor */
+  TaudioSource({required super.context});
+  /* abstract */
+  Future<void> open();
 }
 
 class TaudioBuffer {
@@ -57,10 +57,11 @@ class TaudioBuffer {
   //void copyTFromhannel({ Float32List destination, int channel }) { audioBuffer.copyfromChannel(destination, channel); }
 
   /* ctor */
-  TaudioBuffer.fromPCM32(
-      {required this.context,
-      required int sampleRate,
-      required List<Float32List> data}) {
+  TaudioBuffer.fromPCM32({
+    required this.context,
+    required int sampleRate,
+    required List<Float32List> data,
+  }) {
     var numberOfChannels = data.length;
     if (numberOfChannels == 0) {
       throw Exception('Number of channels is 0');
@@ -81,10 +82,11 @@ class TaudioBuffer {
   /* ctor */
   TaudioBuffer({required this.context, required this.audioBuffer});
 
-  static Future<TaudioBuffer> decode(
-      {required AudioContext context,
-      required Uint8List buffer,
-      required TaudioCodec codec}) async {
+  static Future<TaudioBuffer> decode({
+    required AudioContext context,
+    required Uint8List buffer,
+    required TaudioCodec codec,
+  }) async {
     // Codec is unused !!!!
     var b = context.decodeAudioData(buffer.buffer.toJS);
     var x = await b.toDart;
@@ -92,12 +94,16 @@ class TaudioBuffer {
     //taudioBuffer = TaudioBuffer(context: context, audioBuffer: x);
   }
 
-  static Future<AudioBufferSourceNode> setBuf(
-      {required AudioContext context,
-      required Uint8List buffer,
-      required TaudioCodec codec}) async {
+  static Future<AudioBufferSourceNode> setBuf({
+    required AudioContext context,
+    required Uint8List buffer,
+    required TaudioCodec codec,
+  }) async {
     TaudioBuffer taudioBuffer = await TaudioBuffer.decode(
-        context: context, buffer: buffer, codec: codec);
+      context: context,
+      buffer: buffer,
+      codec: codec,
+    );
     AudioBufferSourceNode n = context.createBufferSource();
     n.buffer = taudioBuffer!.audioBuffer;
     return n;
@@ -107,14 +113,20 @@ class TaudioBuffer {
 abstract class taudioBufferSource extends TaudioSource {
   TaudioBuffer? taudioBuffer;
 
-  /* ctor */ taudioBufferSource({required super.context});
+  /* ctor */
+  taudioBufferSource({required super.context});
 
   //Future<void> decode({ required Uint8List buffer, required TaudioCodec codec }) => TaudioBuffer.decode(context: context, buffer: buffer, codec: codec);
 
-  Future<TaudioBuffer> setBuf(
-      {required Uint8List buffer, required TaudioCodec codec}) async {
+  Future<TaudioBuffer> setBuf({
+    required Uint8List buffer,
+    required TaudioCodec codec,
+  }) async {
     taudioBuffer = await TaudioBuffer.decode(
-        context: context, buffer: buffer, codec: codec);
+      context: context,
+      buffer: buffer,
+      codec: codec,
+    );
     AudioBufferSourceNode n = context.createBufferSource();
     n.buffer = taudioBuffer!.audioBuffer;
     node = n;
@@ -127,8 +139,12 @@ class FromCodeString extends taudioBufferSource {
   late TaudioCodec codec; // Unused
   late Uint8List buffer;
 
-  /* ctor */ FromCodeString(
-      {required super.context, required this.codec, required this.buffer});
+  /* ctor */
+  FromCodeString({
+    required super.context,
+    required this.codec,
+    required this.buffer,
+  });
   // Codec is unused
 
   Future<void> open() async {
@@ -139,9 +155,9 @@ class FromCodeString extends taudioBufferSource {
 class FromBuffer extends taudioBufferSource {
   late TaudioCodec codec; // Unused
 
-//late Uint8List buffer;
-/* ctor */ FromBuffer(
-      {required super.context, required TaudioBuffer taudioBuffer});
+  //late Uint8List buffer;
+  /* ctor */
+  FromBuffer({required super.context, required TaudioBuffer taudioBuffer});
 
   Future<void> open() async {
     AudioBufferSourceNode n = context.createBufferSource();
@@ -153,12 +169,19 @@ class FromBuffer extends taudioBufferSource {
 class FromPCM32 extends taudioBufferSource {
   late int sampleRate;
   late List<Float32List> data;
-  /* ctor */ FromPCM32(
-      {required super.context, required this.sampleRate, required this.data});
+  /* ctor */
+  FromPCM32({
+    required super.context,
+    required this.sampleRate,
+    required this.data,
+  });
 
   Future<void> open() async {
     taudioBuffer = TaudioBuffer.fromPCM32(
-        context: context, sampleRate: sampleRate, data: data);
+      context: context,
+      sampleRate: sampleRate,
+      data: data,
+    );
   }
 }
 
@@ -166,7 +189,8 @@ class FromAsset extends taudioBufferSource {
   late String path;
   late TaudioCodec codec;
 
-  /* ctor */ FromAsset({
+  /* ctor */
+  FromAsset({
     required super.context,
     required this.codec, // Codec is unused
     required String this.path,
@@ -183,11 +207,12 @@ class FromUri extends taudioBufferSource {
   late String path;
   late TaudioCodec codec;
 
-  /* ctor */ FromUri(
-      {required super.context,
-      required String this.path,
-      required this.codec // Codec is unused
-      });
+  /* ctor */
+  FromUri({
+    required super.context,
+    required String this.path,
+    required this.codec, // Codec is unused
+  });
 
   Future<void> open() async {
     Uint8List buf1 = await http.readBytes(Uri.parse(path));
