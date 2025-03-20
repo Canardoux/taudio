@@ -19,9 +19,8 @@
 //import 'package:taudio/src/taudio_nat.dart';
 
 import 'dart:typed_data' show Uint8List;
-import 'package:taudio/src/taudio_nat.dart';
 
-import '../taudio.dart';
+import '../../taudio.dart';
 
 import '../src/dummy.dart'
     if (dart.library.html) '../src/taudio_web.dart'
