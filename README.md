@@ -35,7 +35,7 @@ The code and the doc are both to be done. Actually, you can refer to [the Flutte
 
 The `Tau` family begins to be rich :). It is composed by those following Flutter plugins.
 
-- `Flutter Sound 9.x` (the legacy plugin developed for many years)
+- [Flutter Sound 9.x](https://flutter-sound.canardoux.xyz/) (the legacy plugin developed for many years)
 - [Etau](https://pub.dev/packages/etau) (which is a port on Flutter Web of the W3C Web Audio API)
 - [Tauweb](https://pub.dev/packages/tau_web) (which is the `Etau` implementation for Flutter Web)
 - [Tauwar](https://pub.dev/packages/tau_war) (which is the `Etau` implementation for Flutter on mobiles)
