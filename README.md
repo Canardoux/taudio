@@ -25,7 +25,7 @@ Actually, Taudio is essentially a new name for  Flutter Sound 10.0. It is 100% c
 
 Why `Taudio` and not `Flutter Sound 10.0.0 ? There are several reasons. Some are good and some are bad.
 - Taudio is released under a different license. We wanted to be clear that it is a different product.
-- Hopefully, the Flutter Sound legacy will diminish with time.
+- Hopefully, the Flutter Sound legacy will decrease with time.
 - Because issues on the Flutter Sound Github repository are a complete mess and I want to start a new clean Github repository.
 - There are too many characters to type in Flutter Sound name.
 - I am fed up with Flutter Sound and I need to work on something new.
