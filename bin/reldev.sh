@@ -17,6 +17,9 @@ if [ "_$1" = "_REL" ] ; then
 
         gsed -i  "s/^ *pod 'flutter_sound_core',\(.*\)$/# pod 'flutter_sound_core',\1/"  example/ios/Podfile
 
+        gsed -i  "s/^ *\(implementation project(':flutter_sound_core'\)/    \/\/\1/" android/build.gradle
+
+        gsed -i  "s/^ *\/\/ *implementation 'com.github.canardoux:flutter_sound_core:/    implementation 'com.github.canardoux:flutter_sound_core:/"  android/build.gradle
 
 # ../flutter_sound_web/pubspec.yaml
 #-------------------------------
@@ -84,6 +87,12 @@ elif [ "_$1" = "_DEV" ]; then
 
 
         gsed -i  "s/^ *# pod 'flutter_sound_core',\(.*\)$/pod 'flutter_sound_core',\1/" example/ios/Podfile
+
+       gsed -i  "s/^ *\/\/ *\(implementation project(':flutter_sound_core'\)/    \1/" android/build.gradle
+
+
+
+        gsed -i  "s/^ *implementation 'xyz.canardoux:flutter_sound_core:/    \/\/implementation 'xyz.canardoux:flutter_sound_core:/"  android/build.gradle
 
 
 # ../flutter_sound_web/pubspec.yaml
