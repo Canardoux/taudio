@@ -1,7 +1,7 @@
 ![pub version](https://img.shields.io/pub/v/taudio.svg?style=flat-square)
 ![Taudio](https://taudio.canardoux.xyz/images/Logotype-primary.png)
 
-- ## `Tau` user : your doc [is here](https://taudio.canardoux.xyz/)
+- ## `Taudio` user : your doc [is here](https://taudio.canardoux.xyz/)
 - ## The CHANGELOG [is here](https://taudio.canardoux.xyz/tau/CHANGELOG.html)
 
 
@@ -42,7 +42,7 @@ The `Tau` family begins to be rich :). It is composed by those following Flutter
 - [Tauwar](https://pub.dev/packages/tau_war) (which is the `Etau` implementation for Flutter on mobiles)
 - [Taudio](https://pub.dev/packages/taudio) (which is (will be) something like Flutter Sound 10.0)
 
-![Architecture](/images/tau_architecture.png)
+![Architecture](https://taudio.canardoux.xyz/images/tau_architecture.png)
 
 ### [Flutter Sound](https://pub.dev/packages/flutter_sound)
 

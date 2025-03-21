@@ -105,19 +105,17 @@ packages:
   flutter_sound_platform_interface:
     dependency: "direct main"
     description:
-      name: flutter_sound_platform_interface
-      sha256: c6fe2dbceee28ac0e2742f3d0df860ca123d2e03cbe0c20d293094102f883997
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.17.18"
+      path: "../../flutter_sound_platform_interface"
+      relative: true
+    source: path
+    version: "0.17.19"
   flutter_sound_web:
     dependency: "direct main"
     description:
-      name: flutter_sound_web
-      sha256: "8266b026606bcb5d6893a819eb8ce3e998cf1976b3ef8fc8f231fb259ce9c7ac"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.17.18"
+      path: "../../flutter_sound_web"
+      relative: true
+    source: path
+    version: "0.17.19"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -408,11 +406,10 @@ packages:
   taudio:
     dependency: "direct main"
     description:
-      name: taudio
-      sha256: "02058801d5a7447dbce89717b041456b3e060ec4de43551752cad4ed1763170e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.17.18"
+      path: ".."
+      relative: true
+    source: path
+    version: "0.17.19"
   term_glyph:
     dependency: transitive
     description:

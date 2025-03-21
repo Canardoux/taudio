@@ -111,7 +111,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
   Logger get logger => _logger;
 
   // Are we waiting for needsForFood completer ?
-  bool _waitForFood = false;
+  //bool _waitForFood = false;
 
   //
   bool _fromStream = false;
@@ -141,8 +141,8 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
   static bool _reStarted = true;
 
   ///
-  StreamSubscription<Food>?
-  _foodStreamSubscription; // ignore: cancel_subscriptions
+  //StreamSubscription<Food>?
+  //_foodStreamSubscription; // ignore: cancel_subscriptions
 
   //
   StreamSubscription<List<Float32List>>?
@@ -156,7 +156,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
   StreamSubscription<Uint8List>?
   _uint8StreamSubscription; // ignore: cancel_subscriptions
 
-  StreamController<Food>? _foodStreamController; //ignore: close_sinks
+  //StreamController<Food>? _foodStreamController; //ignore: close_sinks
 
   StreamController<List<Float32List>>? _pcmF32Controller; //ignore: close_sinks
   StreamController<List<Int16List>>? _pcmInt16Controller; //ignore: close_sinks
@@ -471,8 +471,8 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
   /// myPlayer.foodSink.add(FoodData(myOtherBuffer));
   /// myPlayer.foodSink.add(FoodEvent((){_mPlayer.stopPlayer();}));
   /// ```
-  @Deprecated('Use [uint8ListSink]')
-  StreamSink<Food>? get foodSink => _foodStreamController?.sink;
+  //@Deprecated('Use [uint8ListSink]')
+  //StreamSink<Food>? get foodSink => _foodStreamController?.sink;
 
   /// Getter of one of the three StreamSink that you may use to feed a player from Stream.
   ///
@@ -1040,7 +1040,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       throw Exception('Player is not open');
     }
     this.codec = codec;
-    this.interleaved = interleaved;
+    //this.interleaved = interleaved;
     this.numChannels = numChannels;
     _oldPosition = 0;
 
@@ -1288,15 +1288,16 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     Completer<Duration>? completer;
     _bufferSize = bufferSize;
     await _stop(); // Just in case
-    _foodStreamController = StreamController();
-    _foodStreamSubscription = _foodStreamController!.stream.listen((
-      food,
-    ) async {
-      _foodStreamSubscription!.pause(food.exec(this));
-      if (Platform.isAndroid && !_waitForFood) {
-        audioPlayerFinished(PlayerState.isPaused.index);
-      }
-    });
+
+    //_foodStreamController = StreamController();
+    //_foodStreamSubscription = _foodStreamController!.stream.listen((
+    //  food,
+    //) async {
+    //      _foodStreamSubscription!.pause(food.exec(this));
+    //      if (Platform.isAndroid && !_waitForFood) {
+    //        audioPlayerFinished(PlayerState.isPaused.index);
+    //      }
+    //    });
 
     _pcmUint8Controller = StreamController();
     _uint8StreamSubscription = _pcmUint8Controller!.stream.listen((food) async {
@@ -1381,9 +1382,9 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     var totalLength = buffer.length;
     while (totalLength > 0 && !isStopped) {
       var bsize = totalLength > _bufferSize ? _bufferSize : totalLength;
-      _waitForFood = true;
+      //_waitForFood = true;
       var ln = await _feed(buffer.sublist(lnData, lnData + bsize));
-      _waitForFood = false;
+      //_waitForFood = false;
       assert(ln >= 0);
       lnData += ln;
       totalLength -= ln;
@@ -1782,10 +1783,13 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
 
   Future<void> _stop() async {
     _logger.d('FS:---> _stop ');
+    /*
     if (_foodStreamSubscription != null) {
       await _foodStreamSubscription!.cancel();
       _foodStreamSubscription = null;
     }
+    
+     */
 
     if (_f32StreamSubscription != null) {
       await _f32StreamSubscription!.cancel();
@@ -1803,13 +1807,15 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     }
 
     _needSomeFoodCompleter = null;
-
+    /*
     if (_foodStreamController != null) {
       await _foodStreamController!.sink.close();
       //await foodStreamController.stream.drain<bool>();
       await _foodStreamController!.close();
       _foodStreamController = null;
     }
+
+ */
 
     if (_pcmF32Controller != null) {
       await _pcmF32Controller!.sink.close();
