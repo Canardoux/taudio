@@ -24,10 +24,11 @@ Taudio is actually in a developement state. There are many things to do before y
 Actually, Taudio is essentially a new name for  Flutter Sound 10.0. It is 100% compatible with the Flutter Sound 9.x API. Later, the API wil be improved little by little for a more clean and modern API. It will be based on the Web Audio API as recommandated by the W3C.
 
 Why `Taudio` and not `Flutter Sound 10.0.0 ? There are several reasons. Some are good and some are bad.
-- Taudio is released under a different license. We wanted to be clear that it is a different product
-- Hopefully, the Flutter Sound legacy will diminish with time
-- There are too many characters to type in Flutter Sound name
-- I am fed up with Flutter Sound and I need to work on something new
+- Taudio is released under a different license. We wanted to be clear that it is a different product.
+- Hopefully, the Flutter Sound legacy will diminish with time.
+- Because issues on the Flutter Sound Github repository are a complete mess and I want to start a new clean Github repository.
+- There are too many characters to type in Flutter Sound name.
+- I am fed up with Flutter Sound and I need to work on something new.
 
 The code and the doc are both to be done. Actually, you can refer to [the Flutter Sound doc](https://flutter-sound.canardoux.xyz/) if you need informations.
 
@@ -53,10 +54,11 @@ This is (will be) an implementation on flutter of the [W3C Web Audio API](https:
 Etau is actually in a developement state. It is an Alpha version. Even not a Beta version. There are many things to do before you can use it. Specially:
 
 - A documentation (TODO)
-- A support of the three main platforms:
+- A support of the main platforms:
    - Web
    - iOS (TODO)
    - Android (TODO)
+   - The desktops (TODO)
 
 The Web Audio API is terrific:
 

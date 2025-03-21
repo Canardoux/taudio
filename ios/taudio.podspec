@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'taudio'
-  s.version          = '0.0.1'
+  s.version          = '0.17.16'
   s.summary          = 'A complete api for audio playback and recording. Member of the `Tau` Family. Audio player, audio recorder. Pray for Ukraine.'
   s.description      = <<-DESC
 A complete api for audio playback and recording. Member of the `Tau` Family. Audio player, audio recorder. Pray for Ukraine.
@@ -20,6 +20,7 @@ A complete api for audio playback and recording. Member of the `Tau` Family. Aud
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'
+  s.dependency 'flutter_sound_core', '0.17.16'
 
   # If your plugin requires a privacy manifest, for example if it uses any
   # required reason APIs, update the PrivacyInfo.xcprivacy file to describe your

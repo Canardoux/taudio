@@ -6,7 +6,7 @@
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:web/web.dart' as web;
 
-import 'taudio_platform_interface.dart';
+import 'flutter_sound_platform_interface.dart';
 
 /// A web implementation of the TaudioPlatform of the Taudio plugin.
 class TaudioWeb extends TaudioPlatform {

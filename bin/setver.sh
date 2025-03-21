@@ -17,7 +17,8 @@ gsed -i  "s/^\( *\/* *implementation 'com.github.canardoux:flutter_sound_core:\)
 
 gsed -i  "s/^\( *version *\).*$/\1'$VERSION'/"                                          android/build.gradle
 
-gsed -i  "s/^\( *s.version *= *\).*$/\1'$VERSION'/"                                     ios/flutter_sound.podspec 2>/dev/null
+gsed -i  "s/^\( *s.version *= *\).*$/\1'$VERSION'/"                                     ios/taudio.podspec 2>/dev/null
+gsed -i  "s/^\( *s.dependency *'flutter_sound_core', *\).*$/\1'$VERSION'/"                        ios/taudio.podspec 2>/dev/null
 
 gsed -i  "s/^\( *version: *\).*$/\1$VERSION/"                                           pubspec.yaml
 gsed -i  "s/^\( *flutter_sound_platform_interface: *#* *\).*$/\1$VERSION/"              pubspec.yaml
