@@ -4,23 +4,26 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'taudio'
-  s.version          = '0.17.16'
+  s.version          = '0.17.17'
   s.summary          = 'A complete api for audio playback and recording. Member of the `Tau` Family. Audio player, audio recorder. Pray for Ukraine.'
   s.description      = <<-DESC
 A complete api for audio playback and recording. Member of the `Tau` Family. Audio player, audio recorder. Pray for Ukraine.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'http://taudio.canardoux.xyz'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Canardoux' => 'larpoux@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
+  s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.platform = :ios, '12.0'
 
   # Flutter.framework does not contain a i386 slice.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
-  s.swift_version = '5.0'
-  s.dependency 'flutter_sound_core', '0.17.16'
+  #s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
+  #s.swift_version = '5.0'
+  s.ios.deployment_target = '12.0'
+  s.static_framework = true
+  s.dependency 'flutter_sound_core', '0.17.17'
 
   # If your plugin requires a privacy manifest, for example if it uses any
   # required reason APIs, update the PrivacyInfo.xcprivacy file to describe your
