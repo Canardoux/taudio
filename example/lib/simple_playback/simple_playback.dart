@@ -113,39 +113,44 @@ class _SimplePlaybackState extends State<SimplePlayback> {
       return Column(
         children: [
           Container(
-            margin: const EdgeInsets.all(3),
-            padding: const EdgeInsets.all(3),
-            height: 100,
-            width: double.infinity,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: const Color(0xFFFAF0E6),
-              border: Border.all(
-                color: Colors.indigo,
-                width: 3,
+              margin: const EdgeInsets.all(3),
+              padding: const EdgeInsets.all(3),
+              height: 100,
+              width: double.infinity,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: const Color(0xFFFAF0E6),
+                border: Border.all(
+                  color: Colors.indigo,
+                  width: 3,
+                ),
               ),
-            ),
-            child: Column(children: [
-            Row(children: [
-              ElevatedButton(
-                onPressed: getPlaybackFn(),
-                //color: Colors.white,
-                //disabledColor: Colors.grey,
-                child: Text(_mPlayer!.isPlaying ? 'Stop' : 'Play'),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Text(_mPlayer!.isPlaying
-                  ? 'Playback in progress'
-                  : 'Player is stopped'),
-            ]),
-              Text(isRunningWithWasm ? 'Running WASM!' : 'Not running under WASM :-(', style: TextStyle(color: isRunningWithWasm ? Colors.green : Colors.red),),
-            ],)
-          ),
-
+              child: Column(
+                children: [
+                  Row(children: [
+                    ElevatedButton(
+                      onPressed: getPlaybackFn(),
+                      //color: Colors.white,
+                      //disabledColor: Colors.grey,
+                      child: Text(_mPlayer!.isPlaying ? 'Stop' : 'Play'),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Text(_mPlayer!.isPlaying
+                        ? 'Playback in progress'
+                        : 'Player is stopped'),
+                  ]),
+                  Text(
+                    isRunningWithWasm
+                        ? 'Running WASM!'
+                        : 'Not running under WASM :-(',
+                    style: TextStyle(
+                        color: isRunningWithWasm ? Colors.green : Colors.red),
+                  ),
+                ],
+              )),
         ],
-
       );
     }
 

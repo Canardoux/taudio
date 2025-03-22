@@ -33,6 +33,9 @@ gsed -i  "s/^\( *#* *flutter_sound_web: *#* *\^*\).*$/\1$VERSION/"              
 
 
 gsed -i  "s/^\( *## \).*$/\1$VERSION/"                                                  ../flutter_sound_platform_interface/CHANGELOG.md
+gsed -i  "s/^\( *## \).*$/\1$VERSION/"                                                  ../flutter_sound_web/CHANGELOG.md
+gsed -i  "s/^\( *## \).*$/\1$VERSION/"                                                  ../flutter_sound/CHANGELOG.md
+
 gsed -i  "s/^\( *version: *\).*$/\1$VERSION/"                                           ../flutter_sound_platform_interface/pubspec.yaml
 gsed -i  "s/^\( *version *= *\).*$/\1'$VERSION'/"                                       ../flutter_sound_core/android/bintray.gradle 2>/dev/null
 gsed -i  "s/^\( *version: *\).*$/\1$VERSION/"                                           ../flutter_sound_web/pubspec.yaml
