@@ -1,12 +1,18 @@
 #!/bin/bash
 
 
+cd ../flutter_sound_web
+git checkout main
+cd ../flutter_sound_platform_interface
+git checkout main
+cd ../flutter_sound_core
+git checkout master
+cd ../taudio
+
+
 
 if [ "_$1" = "_REL" ] ; then
         echo 'REL mode'
-
-        echo '--------'
-
 
 
 
@@ -75,9 +81,6 @@ if [ "_$1" = "_REL" ] ; then
 
 elif [ "_$1" = "_DEV" ]; then
         echo 'DEV mode'
-        echo '--------'
-
-
 
 
         gsed -i  "s/^ *\/\/ *project(':flutter_sound_core').projectDir\(.*\)$/   project(':flutter_sound_core').projectDir\1/" example/android/settings.gradle
@@ -143,8 +146,5 @@ else
         echo "Correct syntax is $0 [REL | DEV]"
         exit -1
 fi
-
-#cd ../
-#bin/reldev.sh $1
 
 echo "Done"

@@ -508,7 +508,7 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
         _reStarted = false;
         await FlutterSoundRecorderPlatform.instance.resetPlugin(this);
       }
-
+      await FlutterSoundRecorderPlatform.instance.initPlugin();
       FlutterSoundRecorderPlatform.instance.openSession(this);
       await FlutterSoundRecorderPlatform.instance.openRecorder(
         this,

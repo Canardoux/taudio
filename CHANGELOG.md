@@ -1,3 +1,8 @@
+### 10.1.0
+
+- Web : the scripts are now loaded during `open()`. We will not anymore have problems with scripts not loaded in time.
+- Web : The plugin does not anymore depend on `import 'dart:html' as html;`
+
 ### 10.0.0
 
 - Flutter Sound v10.0 ([taudio](https://taudio.canardoux.xyz/)). Actually just a port of Flutter Sound v9.x (Please pay attention to the GPL License).

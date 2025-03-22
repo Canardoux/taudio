@@ -740,6 +740,7 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       _reStarted = false;
       await FlutterSoundPlayerPlatform.instance.resetPlugin(this);
     }
+    await FlutterSoundPlayerPlatform.instance.initPlugin();
     FlutterSoundPlayerPlatform.instance.openSession(this);
     _setPlayerCallback();
     assert(_openPlayerCompleter == null);
