@@ -43,6 +43,7 @@ class SimplePlayback extends StatefulWidget {
 
 class _SimplePlaybackState extends State<SimplePlayback> {
   bool _mPlayerIsInited = false;
+  static const isRunningWithWasm = bool.fromEnvironment('dart.tool.dart2wasm');
 
   @override
   void initState() {
@@ -114,7 +115,7 @@ class _SimplePlaybackState extends State<SimplePlayback> {
           Container(
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
-            height: 80,
+            height: 100,
             width: double.infinity,
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -124,7 +125,8 @@ class _SimplePlaybackState extends State<SimplePlayback> {
                 width: 3,
               ),
             ),
-            child: Row(children: [
+            child: Column(children: [
+            Row(children: [
               ElevatedButton(
                 onPressed: getPlaybackFn(),
                 //color: Colors.white,
@@ -138,8 +140,12 @@ class _SimplePlaybackState extends State<SimplePlayback> {
                   ? 'Playback in progress'
                   : 'Player is stopped'),
             ]),
+              Text(isRunningWithWasm ? 'Running WASM!' : 'Not running under WASM :-(', style: TextStyle(color: isRunningWithWasm ? Colors.green : Colors.red),),
+            ],)
           ),
+
         ],
+
       );
     }
 
