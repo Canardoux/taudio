@@ -239,6 +239,9 @@ class _StreamsExampleState extends State<StreamsExample> {
   List<List<Float32List>> repackF32(List<List<Float32List>> source) {
     ixs = 0;
     ps = 0;
+    if (source.length == 0) {
+      return source;
+    }
     int nbrChannels = source[0].length;
     List<List<Float32List>> dest = [];
     while (true) {
@@ -266,6 +269,10 @@ class _StreamsExampleState extends State<StreamsExample> {
   List<List<Int16List>> repackI16(List<List<Int16List>> source) {
     ixs = 0;
     ps = 0;
+    if (source.length == 0) {
+      return source;
+    }
+
     int nbrChannels = source[0].length;
     List<List<Int16List>> dest = [];
     while (true) {
