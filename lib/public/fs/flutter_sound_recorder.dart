@@ -895,7 +895,6 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
         audioSource: audioSource,
         enableNoiseSuppression: enableNoiseSuppression,
         enableEchoCancellation: enableEchoCancellation,
-
       );
       _recorderState = RecorderState.isRecording;
     } on Exception {

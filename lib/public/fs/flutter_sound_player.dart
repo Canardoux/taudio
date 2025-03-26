@@ -753,7 +753,6 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       );
       _playerState = PlayerState.values[state];
 
-
       //_pcmUint8Controller = StreamController();
       //_uint8StreamSubscription = _pcmUint8Controller!.stream.listen((food) async {
       //  _uint8StreamSubscription!.pause(_feed(food));
@@ -769,9 +768,8 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       //_pcmInt16Controller = StreamController();
       //_int16StreamSubscription = _pcmInt16Controller!.stream.listen((food) async {
       //  _int16StreamSubscription!.pause(feedInt16FromStream(food));
-       // //await feedInt16FromStream(food); // await?
+      // //await feedInt16FromStream(food); // await?
       //});
-
 
       //isInited = success ?  Initialized.fullyInitialized : Initialized.notInitialized;
     } on Exception {
@@ -1358,9 +1356,6 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       _int16StreamSubscription!.pause(feedInt16FromStream(food));
       //await feedInt16FromStream(food); // await?
     });
-
-
-
 
     if (_startPlayerCompleter != null) {
       _logger.w('Killing another startPlayer()');
