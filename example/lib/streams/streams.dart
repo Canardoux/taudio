@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:taudio/taudio.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:audio_session/audio_session.dart';
 
 /*
 
@@ -76,9 +77,27 @@ class _StreamsExampleState extends State<StreamsExample> {
   double _mVolume = 100.0;
   double _mPan = 100.0;
 
-  @override
-  void initState() {
-    super.initState();
+
+  Future<void> init() async {
+    final session = await AudioSession.instance;
+    await session.configure(AudioSessionConfiguration(
+      avAudioSessionCategory: AVAudioSessionCategory.playAndRecord,
+      avAudioSessionCategoryOptions:
+      AVAudioSessionCategoryOptions.allowBluetooth |
+      AVAudioSessionCategoryOptions.defaultToSpeaker,
+      avAudioSessionMode: AVAudioSessionMode.spokenAudio,
+      avAudioSessionRouteSharingPolicy:
+      AVAudioSessionRouteSharingPolicy.defaultPolicy,
+      avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.none,
+      androidAudioAttributes: const AndroidAudioAttributes(
+        contentType: AndroidAudioContentType.speech,
+        flags: AndroidAudioFlags.none,
+        usage: AndroidAudioUsage.voiceCommunication,
+      ),
+      androidAudioFocusGainType: AndroidAudioFocusGainType.gain,
+      androidWillPauseWhenDucked: true,
+    ));
+
     setCodec(Codec.pcmFloat32);
     // Do not access your FlutterSoundPlayer or FlutterSoundRecorder before the completion of the Future
     _mPlayer.openPlayer().then((value) {
@@ -87,6 +106,12 @@ class _StreamsExampleState extends State<StreamsExample> {
       });
       _openRecorder();
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    init();
   }
 
   @override
@@ -239,7 +264,7 @@ class _StreamsExampleState extends State<StreamsExample> {
   List<List<Float32List>> repackF32(List<List<Float32List>> source) {
     ixs = 0;
     ps = 0;
-    if (source.length == 0) {
+    if (source.isEmpty) {
       return source;
     }
     int nbrChannels = source[0].length;
@@ -269,7 +294,7 @@ class _StreamsExampleState extends State<StreamsExample> {
   List<List<Int16List>> repackI16(List<List<Int16List>> source) {
     ixs = 0;
     ps = 0;
-    if (source.length == 0) {
+    if (source.isEmpty) {
       return source;
     }
 
@@ -319,6 +344,18 @@ class _StreamsExampleState extends State<StreamsExample> {
           };
   }
 
+  void pause() async {
+    await _mRecorder.pauseRecorder();
+    setState(() {
+    });
+  }
+
+  void resume() async {
+    await _mRecorder.resumeRecorder();
+    setState(() {
+    });
+
+  }
   // ----------------------  Here is the code to play from a Stream -----------------------
 
   /// This is our main function where we begin to play
@@ -427,7 +464,7 @@ class _StreamsExampleState extends State<StreamsExample> {
         Container(
           margin: const EdgeInsets.all(3),
           padding: const EdgeInsets.all(3),
-          height: 100,
+          height: 130,
           width: double.infinity,
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -448,12 +485,21 @@ class _StreamsExampleState extends State<StreamsExample> {
               const SizedBox(
                 width: 20,
               ),
-              Text(_mRecorder.isRecording
-                  ? 'Recording in progress'
-                  : 'Recorder is stopped'),
-              const SizedBox(
-                width: 20,
+              ElevatedButton(
+                onPressed: _mRecorder.isRecording ? pause : null,
+                //color: Colors.white,
+                //disabledColor: Colors.grey,
+                child: const Text('Pause'),
               ),
+              ElevatedButton(
+                onPressed: _mRecorder.isPaused ? resume : null,
+                //color: Colors.white,
+                //disabledColor: Colors.grey,
+                child: const Text('Resume'),
+              ),
+
+
+
             ]),
             const SizedBox(
               height: 20,
@@ -465,6 +511,15 @@ class _StreamsExampleState extends State<StreamsExample> {
                         const AlwaysStoppedAnimation<Color>(Colors.indigo),
                     backgroundColor: Colors.limeAccent)
                 : Container(),
+
+            Text(_mRecorder.isRecording
+                ? 'Recording in progress'
+                : 'Recorder is stopped'),
+            const SizedBox(
+              width: 20,
+            ),
+
+
           ]),
         ),
         Container(

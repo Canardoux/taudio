@@ -752,6 +752,27 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
         logLevel: _logLevel,
       );
       _playerState = PlayerState.values[state];
+
+
+      //_pcmUint8Controller = StreamController();
+      //_uint8StreamSubscription = _pcmUint8Controller!.stream.listen((food) async {
+      //  _uint8StreamSubscription!.pause(_feed(food));
+      //  //await _feed(food); // await?
+      //});
+
+      //_pcmF32Controller = StreamController();
+      //_f32StreamSubscription = _pcmF32Controller!.stream.listen((food) async {
+      //  _f32StreamSubscription!.pause(feedF32FromStream(food));
+      //  //await feedF32FromStream(food); // await?
+      //});
+
+      //_pcmInt16Controller = StreamController();
+      //_int16StreamSubscription = _pcmInt16Controller!.stream.listen((food) async {
+      //  _int16StreamSubscription!.pause(feedInt16FromStream(food));
+       // //await feedInt16FromStream(food); // await?
+      //});
+
+
       //isInited = success ?  Initialized.fullyInitialized : Initialized.notInitialized;
     } on Exception {
       _openPlayerCompleter = null;
@@ -809,6 +830,26 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
 
     await _stop(); // Stop the player if running
     //_isInited = Initialized.initializationInProgress; // BOF
+
+    if (_pcmF32Controller != null) {
+      await _pcmF32Controller!.sink.close();
+      //await foodStreamController.stream.drain<bool>();
+      await _pcmF32Controller!.close();
+      _pcmF32Controller = null;
+    }
+    if (_pcmUint8Controller != null) {
+      await _pcmUint8Controller!.sink.close();
+      //await foodStreamController.stream.drain<bool>();
+      await _pcmUint8Controller!.close();
+      _pcmUint8Controller = null;
+    }
+    if (_pcmInt16Controller != null) {
+      await _pcmInt16Controller!.sink.close();
+      //await foodStreamController.stream.drain<bool>();
+      await _pcmInt16Controller!.close();
+      _pcmInt16Controller = null;
+    }
+
     _cleanCompleters();
     _removePlayerCallback();
     await FlutterSoundPlayerPlatform.instance.closePlayer(this);
@@ -1126,9 +1167,11 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
   ///
   /// Later, we will implement the _Tau Audio Graph_ concept, which will be a more general object.
   ///
-  /// - `startPlayerFromMic()` has two optional parameters :
-  ///    - `sampleRate:` the Sample Rate used. Optional. Only used on Android. The default value is probably a good choice and the App can ommit this optional parameter.
-  ///    - `numChannels:` 1 for monophony, 2 for stereophony. Optional. Actually only monophony is implemented.
+  /// startPlayerFromMic() has four optional parameters :
+  ///    - **_sampleRate:_** the Sample Rate used. Optional. Only used on Android. The default value is probably a good choice and the App can ommit this optional parameter.
+  ///    - **_numChannels:_** 1 for monophony, 2 for stereophony. Optional. Actually only monophony is implemented.
+  ///    - **_bufferSize:_** the size of the internal buffers. Probably the default choice is OK
+  ///    - **_enableVoiceProcessing:_** is a flag that you can enable
   ///
   /// `startPlayerFromMic()` returns a Future, which is completed when the Player is really started.
   ///
@@ -1138,11 +1181,9 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
   ///     ...
   ///     myPlayer.stopPlayer();
   /// ```
-  @Deprecated(
-    'This function can very easily be emulated with a RecordToStream + a PlayFromStream',
-  )
+  ///  'This function can very easily be emulated with a RecordToStream + a PlayFromStream',
   Future<void> startPlayerFromMic({
-    int sampleRate = 44000, // The default value is probably a good choice.
+    int sampleRate = 48000, // The default value is probably a good choice.
     int numChannels =
         1, // 1 for monophony, 2 for stereophony (actually only monophony is supported).
     int bufferSize = 8192,
@@ -1317,6 +1358,9 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
       _int16StreamSubscription!.pause(feedInt16FromStream(food));
       //await feedInt16FromStream(food); // await?
     });
+
+
+
 
     if (_startPlayerCompleter != null) {
       _logger.w('Killing another startPlayer()');
@@ -1794,16 +1838,25 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
 
     if (_f32StreamSubscription != null) {
       await _f32StreamSubscription!.cancel();
+      await _pcmF32Controller?.sink.close();
+      await _pcmF32Controller?.close();
+      _pcmF32Controller = null;
       _f32StreamSubscription = null;
     }
 
     if (_int16StreamSubscription != null) {
       await _int16StreamSubscription!.cancel();
+      await _pcmInt16Controller?.sink.close();
+      await _pcmInt16Controller?.close();
+      _pcmInt16Controller = null;
       _int16StreamSubscription = null;
     }
 
     if (_uint8StreamSubscription != null) {
       await _uint8StreamSubscription!.cancel();
+      await _pcmUint8Controller?.sink.close();
+      await _pcmUint8Controller?.close();
+      _pcmUint8Controller = null;
       _uint8StreamSubscription = null;
     }
 
@@ -1817,25 +1870,6 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     }
 
  */
-
-    if (_pcmF32Controller != null) {
-      await _pcmF32Controller!.sink.close();
-      //await foodStreamController.stream.drain<bool>();
-      await _pcmF32Controller!.close();
-      _pcmF32Controller = null;
-    }
-    if (_pcmUint8Controller != null) {
-      await _pcmUint8Controller!.sink.close();
-      //await foodStreamController.stream.drain<bool>();
-      await _pcmUint8Controller!.close();
-      _pcmUint8Controller = null;
-    }
-    if (_pcmInt16Controller != null) {
-      await _pcmInt16Controller!.sink.close();
-      //await foodStreamController.stream.drain<bool>();
-      await _pcmInt16Controller!.close();
-      _pcmInt16Controller = null;
-    }
 
     Completer<void>? completer;
     _stopPlayerCompleter = Completer<void>();

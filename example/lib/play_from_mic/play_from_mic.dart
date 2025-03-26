@@ -35,29 +35,25 @@ This example is really basic.
 
 typedef _Fn = void Function();
 
-/* This does not work. on Android we must have the Manifest.permission.CAPTURE_AUDIO_OUTPUT permission.
- * But this permission is _is reserved for use by system components and is not available to third-party applications._
- * Pleaser look to [this](https://developer.android.com/reference/android/media/MediaRecorder.AudioSource#VOICE_UPLINK)
- *
- * I think that the problem is because it is illegal to record a communication in many countries.
- * Probably this stands also on iOS.
- * Actually I am unable to record DOWNLINK on my Xiaomi Chinese phone.
- *
- */
-//const theSource = AudioSource.voiceUpLink;
-//const theSource = AudioSource.voiceDownlink;
-
 const theSource = AudioSource.microphone;
 
 // Example app.
-class SimpleRecorder extends StatefulWidget {
-  const SimpleRecorder({super.key});
+class PlayFromMic extends StatefulWidget {
+  const PlayFromMic({super.key});
 
   @override
-  State<SimpleRecorder> createState() => _SimpleRecorderState();
+  State<PlayFromMic> createState() => _PlayFromMic();
 }
 
-class _SimpleRecorderState extends State<SimpleRecorder> {
+class _PlayFromMic extends State<PlayFromMic> {
+
+  /// Our player
+  late FlutterSoundPlayer _mPlayer = FlutterSoundPlayer();
+
+  /// Our recorder
+  late FlutterSoundRecorder _mRecorder = FlutterSoundRecorder();
+
+
 
   Future<void> init() async {
     final session = await AudioSession.instance;
@@ -79,7 +75,6 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
       androidWillPauseWhenDucked: true,
     ));
 
-
     _mPlayer!.openPlayer().then((value) {
       setState(() {
         _mPlayerIsInited = true;
@@ -95,31 +90,28 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
 
   @override
   void initState() {
-    init();
-    super.initState();
+     super.initState();
+     init();
   }
 
   @override
   void dispose() {
-    _mPlayer!.closePlayer();
-    _mPlayer = null;
+    _mPlayer.closePlayer();
 
-    _mRecorder!.closeRecorder();
-    _mRecorder = null;
+    _mRecorder.closeRecorder();
     super.dispose();
   }
 
   // ------------------------------ This is the recorder stuff -----------------------------
 
-  Codec _codec = Codec.aacMP4;
-  String _mPath = 'tau_file.mp4';
+  static const Codec _codec = Codec.pcmFloat32;
+  static const int _sampleRate = 48000;
+
   bool _mRecorderIsInited = false;
-
-  /// Our player
-  FlutterSoundPlayer? _mPlayer = FlutterSoundPlayer();
-
-  /// Our recorder
-  FlutterSoundRecorder? _mRecorder = FlutterSoundRecorder();
+  double _dbLevel = 0.0;
+  StreamSubscription? _recorderSubscription;
+  bool bNoiseSuppression = false;
+  bool bEchoCancellation = false;
 
   /// Request permission to record something and open the recorder
   Future<void> openTheRecorder() async {
@@ -130,62 +122,62 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
       }
     }
     await _mRecorder!.openRecorder();
-    if (!await _mRecorder!.isEncoderSupported(_codec) && kIsWeb) {
-      _codec = Codec.opusWebM;
-      _mPath = 'tau_file.webm';
-      if (!await _mRecorder!.isEncoderSupported(_codec) && kIsWeb) {
-        _mRecorderIsInited = true;
-        return;
-      }
-    }
+
+    _recorderSubscription = _mRecorder!.onProgress!.listen((e) {
+      // pos = e.duration.inMilliseconds; // We do not need this information in this example.
+      setState(() {
+        _dbLevel = e.decibels as double;
+      });
+    });
+    await _mRecorder!.setSubscriptionDuration(
+        const Duration(milliseconds: 100)); // DO NOT FORGET THIS CALL !!!
+
+
     _mRecorderIsInited = true;
   }
 
   /// Begin to record.
   /// This is our main function.
   /// We ask Flutter Sound to record to a File.
-  void record() {
-    _mRecorder!
-        .startRecorder(
-      toFile: _mPath,
-      codec: _codec,
-      audioSource: theSource,
-    )
-        .then((value) {
-      setState(() {});
-    });
-  }
+  void record() async {
+    assert(_mPlayerIsInited &&
+        _mRecorder.isStopped &&
+        _mPlayer!.isStopped);
 
+    await _mPlayer
+        .startPlayerFromStream(
+      codec: _codec,
+      sampleRate: _sampleRate,
+      interleaved: false,
+      bufferSize: 1024,
+      numChannels: 2,
+    );
+
+    await _mRecorder.startRecorder(
+              codec: _codec,
+              audioSource: theSource,
+              toStreamFloat32: _mPlayer.float32Sink,
+              sampleRate: _sampleRate,
+              numChannels: 2,
+            );
+    setState(() {});
+  }
   /// Stop the recorder
   void stopRecorder() async {
+    await _mPlayer.stopPlayer();
     await _mRecorder!.stopRecorder().then((value) {
       setState(() {
         //var url = value;
-        _mplaybackReady = true;
       });
     });
   }
 
 // ----------------------------- This is the player stuff ---------------------------------
 
-  bool _mplaybackReady = false;
   bool _mPlayerIsInited = false;
 
   /// Begin to play the recorded sound
   void play() {
-    assert(_mPlayerIsInited &&
-        _mplaybackReady &&
-        _mRecorder!.isStopped &&
-        _mPlayer!.isStopped);
-    _mPlayer!
-        .startPlayer(
-            fromURI: _mPath,
-            whenFinished: () {
-              setState(() {});
-            })
-        .then((value) {
-      setState(() {});
-    });
   }
 
   /// Stop the player
@@ -197,18 +189,21 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
 
 // ----------------------------- UI --------------------------------------------
 
+
+  // The user changed its selection. Reset the 3 buffers
+  Future<void> reinit() async {
+    await _mPlayer.stopPlayer();
+    await _mRecorder.stopRecorder();
+    setState(() {
+    });
+  }
+
+
   _Fn? getRecorderFn() {
-    if (!_mRecorderIsInited || !_mPlayer!.isStopped) {
+    if (!_mRecorderIsInited || !_mPlayerIsInited) {
       return null;
     }
     return _mRecorder!.isStopped ? record : stopRecorder;
-  }
-
-  _Fn? getPlaybackFn() {
-    if (!_mPlayerIsInited || !_mplaybackReady || !_mRecorder!.isStopped) {
-      return null;
-    }
-    return _mPlayer!.isStopped ? play : stopPlayer;
   }
 
   @override
@@ -219,7 +214,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
           Container(
             margin: const EdgeInsets.all(3),
             padding: const EdgeInsets.all(3),
-            height: 80,
+            height: 200,
             width: double.infinity,
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -229,7 +224,10 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
                 width: 3,
               ),
             ),
-            child: Row(children: [
+            child:Column(children: [
+
+
+            Row(children: [
               ElevatedButton(
                 onPressed: getRecorderFn(),
                 //color: Colors.white,
@@ -243,33 +241,42 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
                   ? 'Recording in progress'
                   : 'Recorder is stopped'),
             ]),
-          ),
-          Container(
-            margin: const EdgeInsets.all(3),
-            padding: const EdgeInsets.all(3),
-            height: 80,
-            width: double.infinity,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: const Color(0xFFFAF0E6),
-              border: Border.all(
-                color: Colors.indigo,
-                width: 3,
-              ),
-            ),
-            child: Row(children: [
-              ElevatedButton(
-                onPressed: getPlaybackFn(),
-                //color: Colors.white,
-                //disabledColor: Colors.grey,
-                child: Text(_mPlayer!.isPlaying ? 'Stop' : 'Play'),
-              ),
               const SizedBox(
-                width: 20,
+                height: 20,
               ),
-              Text(_mPlayer!.isPlaying
-                  ? 'Playback in progress'
-                  : 'Player is stopped'),
+              _mRecorder!.isRecording
+                  ? LinearProgressIndicator(
+                  value: _dbLevel / 100,
+                  valueColor:
+                  const AlwaysStoppedAnimation<Color>(Colors.indigo),
+                  backgroundColor: Colors.limeAccent)
+                  : Container(),
+
+              CheckboxListTile(
+                tileColor: const Color(0xFFFAF0E6),
+                title: const Text("Noise Suppression"),
+                value: bNoiseSuppression,
+                onChanged: (newValue) {
+                  reinit();
+                  setState(() {
+                    bNoiseSuppression = newValue!;
+                  });
+                },
+              ),
+
+
+              CheckboxListTile(
+                tileColor: const Color(0xFFFAF0E6),
+                title: const Text("Echo Cancellation"),
+                value: bEchoCancellation,
+                onChanged: (newValue) {
+                  reinit();
+                  setState(() {
+                    bEchoCancellation = newValue!;
+                  });
+                },
+              ),
+
             ]),
           ),
         ],
@@ -279,7 +286,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
-        title: const Text('Simple Recorder'),
+        title: const Text('Play from Mic'),
       ),
       body: makeBody(),
     );

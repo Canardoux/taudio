@@ -1,3 +1,9 @@
+
+### 10.2.0
+
+- [startPlayerFromMic()](https://taudio.canardoux.xyz/api/public_fs_flutter_sound_player/FlutterSoundPlayer/startPlayerFromMic.html) is not flagged anymore as deprecated because it was used by some users.
+- Add a new example : [Play from Mic](https://taudio.canardoux.xyz/tau/examples/ex_play_from_mic.html)
+
 ### 10.1.1
 
 - Web : Fix a bug in JS types, during `RecordToStream`. Now WASM is completely functional. Everything work perfectely :-)

@@ -750,6 +750,8 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
     int bufferSize = 8192,
     bool enableVoiceProcessing = false,
     AudioSource audioSource = AudioSource.defaultSource,
+    bool enableNoiseSuppression = false,
+    bool enableEchoCancellation = true,
   }) async {
     _logger.d('FS:---> startRecorder ');
 
@@ -798,6 +800,8 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
         bufferSize: bufferSize,
         enableVoiceProcessing: enableVoiceProcessing,
         audioSource: audioSource,
+        enableNoiseSuppression: enableNoiseSuppression,
+        enableEchoCancellation: enableEchoCancellation,
       );
     });
     _logger.d('FS:<--- startRecorder ');
@@ -817,6 +821,8 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
     int bufferSize = 8192,
     bool enableVoiceProcessing = false,
     AudioSource audioSource = AudioSource.defaultSource,
+    bool enableNoiseSuppression = false,
+    bool enableEchoCancellation = true,
   }) async {
     _logger.d('FS:---> _startRecorder.');
     await _waitOpen();
@@ -887,6 +893,9 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
         codec: codec,
         timeSlice: Duration.zero, // Not used anymore
         audioSource: audioSource,
+        enableNoiseSuppression: enableNoiseSuppression,
+        enableEchoCancellation: enableEchoCancellation,
+
       );
       _recorderState = RecorderState.isRecording;
     } on Exception {

@@ -20,6 +20,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:taudio/taudio.dart';
+import 'package:audio_session/audio_session.dart';
 
 /*
 
@@ -45,14 +46,38 @@ class _SimplePlaybackState extends State<SimplePlayback> {
   bool _mPlayerIsInited = false;
   static const isRunningWithWasm = bool.fromEnvironment('dart.tool.dart2wasm');
 
-  @override
-  void initState() {
-    super.initState();
+  Future<void> init() async {
     _mPlayer!.openPlayer().then((value) {
       setState(() {
         _mPlayerIsInited = true;
       });
     });
+    final session = await AudioSession.instance;
+    await session.configure(AudioSessionConfiguration(
+      avAudioSessionCategory: AVAudioSessionCategory.playAndRecord,
+      avAudioSessionCategoryOptions:
+      AVAudioSessionCategoryOptions.allowBluetooth |
+      AVAudioSessionCategoryOptions.defaultToSpeaker,
+      avAudioSessionMode: AVAudioSessionMode.spokenAudio,
+      avAudioSessionRouteSharingPolicy:
+      AVAudioSessionRouteSharingPolicy.defaultPolicy,
+      avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.none,
+      androidAudioAttributes: const AndroidAudioAttributes(
+        contentType: AndroidAudioContentType.speech,
+        flags: AndroidAudioFlags.none,
+        usage: AndroidAudioUsage.voiceCommunication,
+      ),
+      androidAudioFocusGainType: AndroidAudioFocusGainType.gain,
+      androidWillPauseWhenDucked: true,
+    ));
+
+
+
+  }
+  @override
+  void initState() {
+    super.initState();
+    init();
   }
 
   @override
@@ -141,7 +166,7 @@ class _SimplePlaybackState extends State<SimplePlayback> {
                         ? 'Playback in progress'
                         : 'Player is stopped'),
                   ]),
-                  Text(
+                  const Text(
                     isRunningWithWasm
                         ? 'Running WASM!'
                         : 'Not running under WASM :-(',

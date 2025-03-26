@@ -23,11 +23,11 @@ dependencies:
   synchronized: ^3.1.0
   logger: ^2.0.2
 # ============================================================================
-  flutter_sound_platform_interface: 10.1.1
-#    path: ../flutter_sound_platform_interface # Flutter Sound Dir
+  flutter_sound_platform_interface: # 10.1.1
+    path: ../flutter_sound_platform_interface # Flutter Sound Dir
 
-  flutter_sound_web: 10.1.1
-#    path: ../flutter_sound_web # Flutter Sound Dir
+  flutter_sound_web: # 10.1.1
+    path: ../flutter_sound_web # Flutter Sound Dir
 
 ##  etau: ^0.0.14-alpha.5
 ##    path: ../../tau/etau # etau Dir

@@ -93,7 +93,7 @@ class TaudioBuffer {
       codec: codec,
     );
     AudioBufferSourceNode n = context.createBufferSource();
-    n.buffer = taudioBuffer!.audioBuffer;
+    n.buffer = taudioBuffer.audioBuffer;
     return n;
   }
 }
