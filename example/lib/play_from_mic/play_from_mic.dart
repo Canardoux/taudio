@@ -46,25 +46,22 @@ class PlayFromMic extends StatefulWidget {
 }
 
 class _PlayFromMic extends State<PlayFromMic> {
-
   /// Our player
   late FlutterSoundPlayer _mPlayer = FlutterSoundPlayer();
 
   /// Our recorder
   late FlutterSoundRecorder _mRecorder = FlutterSoundRecorder();
 
-
-
   Future<void> init() async {
     final session = await AudioSession.instance;
     await session.configure(AudioSessionConfiguration(
       avAudioSessionCategory: AVAudioSessionCategory.playAndRecord,
       avAudioSessionCategoryOptions:
-      AVAudioSessionCategoryOptions.allowBluetooth |
-      AVAudioSessionCategoryOptions.defaultToSpeaker,
+          AVAudioSessionCategoryOptions.allowBluetooth |
+              AVAudioSessionCategoryOptions.defaultToSpeaker,
       avAudioSessionMode: AVAudioSessionMode.spokenAudio,
       avAudioSessionRouteSharingPolicy:
-      AVAudioSessionRouteSharingPolicy.defaultPolicy,
+          AVAudioSessionRouteSharingPolicy.defaultPolicy,
       avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.none,
       androidAudioAttributes: const AndroidAudioAttributes(
         contentType: AndroidAudioContentType.speech,
@@ -90,8 +87,8 @@ class _PlayFromMic extends State<PlayFromMic> {
 
   @override
   void initState() {
-     super.initState();
-     init();
+    super.initState();
+    init();
   }
 
   @override
@@ -132,7 +129,6 @@ class _PlayFromMic extends State<PlayFromMic> {
     await _mRecorder!.setSubscriptionDuration(
         const Duration(milliseconds: 100)); // DO NOT FORGET THIS CALL !!!
 
-
     _mRecorderIsInited = true;
   }
 
@@ -140,12 +136,9 @@ class _PlayFromMic extends State<PlayFromMic> {
   /// This is our main function.
   /// We ask Flutter Sound to record to a File.
   void record() async {
-    assert(_mPlayerIsInited &&
-        _mRecorder.isStopped &&
-        _mPlayer!.isStopped);
+    assert(_mPlayerIsInited && _mRecorder.isStopped && _mPlayer!.isStopped);
 
-    await _mPlayer
-        .startPlayerFromStream(
+    await _mPlayer.startPlayerFromStream(
       codec: _codec,
       sampleRate: _sampleRate,
       interleaved: false,
@@ -154,14 +147,15 @@ class _PlayFromMic extends State<PlayFromMic> {
     );
 
     await _mRecorder.startRecorder(
-              codec: _codec,
-              audioSource: theSource,
-              toStreamFloat32: _mPlayer.float32Sink,
-              sampleRate: _sampleRate,
-              numChannels: 2,
-            );
+      codec: _codec,
+      audioSource: theSource,
+      toStreamFloat32: _mPlayer.float32Sink,
+      sampleRate: _sampleRate,
+      numChannels: 2,
+    );
     setState(() {});
   }
+
   /// Stop the recorder
   void stopRecorder() async {
     await _mPlayer.stopPlayer();
@@ -177,8 +171,7 @@ class _PlayFromMic extends State<PlayFromMic> {
   bool _mPlayerIsInited = false;
 
   /// Begin to play the recorded sound
-  void play() {
-  }
+  void play() {}
 
   /// Stop the player
   void stopPlayer() {
@@ -189,15 +182,12 @@ class _PlayFromMic extends State<PlayFromMic> {
 
 // ----------------------------- UI --------------------------------------------
 
-
   // The user changed its selection. Reset the 3 buffers
   Future<void> reinit() async {
     await _mPlayer.stopPlayer();
     await _mRecorder.stopRecorder();
-    setState(() {
-    });
+    setState(() {});
   }
-
 
   _Fn? getRecorderFn() {
     if (!_mRecorderIsInited || !_mPlayerIsInited) {
@@ -224,34 +214,31 @@ class _PlayFromMic extends State<PlayFromMic> {
                 width: 3,
               ),
             ),
-            child:Column(children: [
-
-
-            Row(children: [
-              ElevatedButton(
-                onPressed: getRecorderFn(),
-                //color: Colors.white,
-                //disabledColor: Colors.grey,
-                child: Text(_mRecorder!.isRecording ? 'Stop' : 'Record'),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Text(_mRecorder!.isRecording
-                  ? 'Recording in progress'
-                  : 'Recorder is stopped'),
-            ]),
+            child: Column(children: [
+              Row(children: [
+                ElevatedButton(
+                  onPressed: getRecorderFn(),
+                  //color: Colors.white,
+                  //disabledColor: Colors.grey,
+                  child: Text(_mRecorder!.isRecording ? 'Stop' : 'Record'),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Text(_mRecorder!.isRecording
+                    ? 'Recording in progress'
+                    : 'Recorder is stopped'),
+              ]),
               const SizedBox(
                 height: 20,
               ),
               _mRecorder!.isRecording
                   ? LinearProgressIndicator(
-                  value: _dbLevel / 100,
-                  valueColor:
-                  const AlwaysStoppedAnimation<Color>(Colors.indigo),
-                  backgroundColor: Colors.limeAccent)
+                      value: _dbLevel / 100,
+                      valueColor:
+                          const AlwaysStoppedAnimation<Color>(Colors.indigo),
+                      backgroundColor: Colors.limeAccent)
                   : Container(),
-
               CheckboxListTile(
                 tileColor: const Color(0xFFFAF0E6),
                 title: const Text("Noise Suppression"),
@@ -263,8 +250,6 @@ class _PlayFromMic extends State<PlayFromMic> {
                   });
                 },
               ),
-
-
               CheckboxListTile(
                 tileColor: const Color(0xFFFAF0E6),
                 title: const Text("Echo Cancellation"),
@@ -276,7 +261,6 @@ class _PlayFromMic extends State<PlayFromMic> {
                   });
                 },
               ),
-
             ]),
           ),
         ],

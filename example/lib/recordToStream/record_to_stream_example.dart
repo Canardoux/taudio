@@ -249,20 +249,20 @@ class _RecordToStreamExampleState extends State<RecordToStreamExample> {
             ),
           ),
           child: Column(children: [
-      Row(children: [
-      ElevatedButton(
-      onPressed: getRecorderFn(),
-      //color: Colors.white,
-      //disabledColor: Colors.grey,
-      child: Text(_mRecorder!.isRecording ? 'Stop' : 'Record'),
-      ),
-      const SizedBox(
-      width: 20,
-      ),
-      Text(_mRecorder!.isRecording
-      ? 'Recording in progress'
-          : 'Recorder is stopped'),
-      ]),
+            Row(children: [
+              ElevatedButton(
+                onPressed: getRecorderFn(),
+                //color: Colors.white,
+                //disabledColor: Colors.grey,
+                child: Text(_mRecorder!.isRecording ? 'Stop' : 'Record'),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Text(_mRecorder!.isRecording
+                  ? 'Recording in progress'
+                  : 'Recorder is stopped'),
+            ]),
             const SizedBox(
               height: 20,
             ),

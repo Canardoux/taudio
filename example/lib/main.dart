@@ -184,7 +184,6 @@ This other example is a little bit simpler because the App does not need to awai
 ''',
   ),
 
-
   Example(
     title: 'Play from mic',
     subTitle: 'Play from the microphone',

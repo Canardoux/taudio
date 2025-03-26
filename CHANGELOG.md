@@ -1,3 +1,6 @@
+### 10.2.1
+
+- Add a trace in the logs to be more verbose on Android when startPlayer() has an exception [fs #1178](https://github.com/Canardoux/flutter_sound/issues/1178)
 
 ### 10.2.0
 
@@ -18,9 +21,9 @@
 ### 10.0.0
 
 - Flutter Sound v10.0 ([Taudio](https://pub.dev/packages/taudio)). Actually just a port of Flutter Sound v9.x (Please pay attention to the GPL License).
-- Fix 404 errors int the doc, because the API ref. was moved ([#1173](https://github.com/Canardoux/flutter_sound/issues/1173))
+- Fix 404 errors int the doc, because the API ref. was moved ([fs #1173](https://github.com/Canardoux/flutter_sound/issues/1173))
 - Android : Use  MediaPlayer's asynchronous prepareAsync() instead of synchronous prepare(), to avoid ANRs when there is no network connection when trying to play from a remote URL. Many thanks to [Eric](https://github.com/ericbomgardner) for his [PR](https://github.com/Canardoux/flutter_sound_core/pull/13).
-- Android : Fix a bug when startPlayer() fires an Exception [(#1174)](https://github.com/Canardoux/flutter_sound/issues/1174)
+- Android : Fix a bug when startPlayer() fires an Exception [(fs #1174)](https://github.com/Canardoux/flutter_sound/issues/1174)
 - Add a very [simple guide](https://taudio.canardoux.xyz/tau/fs2taudio.html) on how to upgrade 9.x to 10.0
 
 ### 9.28.0

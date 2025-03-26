@@ -2,7 +2,7 @@ PODS:
   - audio_session (0.0.1):
     - Flutter
   - Flutter (1.0.0)
-  - flutter_sound_core (10.1.1)
+  - flutter_sound_core (10.2.0)
   - just_audio (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -11,26 +11,27 @@ PODS:
     - FlutterMacOS
   - permission_handler_apple (9.3.0):
     - Flutter
-  - taudio (10.1.1):
+  - taudio (10.2.0):
     - Flutter
-    - flutter_sound_core (= 10.1.1)
+    - flutter_sound_core (= 10.2.0)
 
 DEPENDENCIES:
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - Flutter (from `Flutter`)
-  - flutter_sound_core (from `../../../flutter_sound_core`)
   - just_audio (from `.symlinks/plugins/just_audio/darwin`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - taudio (from `.symlinks/plugins/taudio/ios`)
+
+SPEC REPOS:
+  trunk:
+    - flutter_sound_core
 
 EXTERNAL SOURCES:
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
   Flutter:
     :path: Flutter
-  flutter_sound_core:
-    :path: "../../../flutter_sound_core"
   just_audio:
     :path: ".symlinks/plugins/just_audio/darwin"
   path_provider_foundation:
@@ -43,12 +44,12 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   audio_session: 9bb7f6c970f21241b19f5a3658097ae459681ba0
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_sound_core: c870f048958de625e0519e7414ce02b33a106eeb
+  flutter_sound_core: 8832b316f749905d128dcfcaadfaa9ddde2af1cb
   just_audio: 4e391f57b79cad2b0674030a00453ca5ce817eed
   path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
-  taudio: 7dc3c1b5f9f407c80d050bde1955e376bba75bc1
+  taudio: 9b34039a7e5659085daa8d311195483db9dc78a0
 
-PODFILE CHECKSUM: 6b138e07e74a0eefd44e27e378602990ebfade0d
+PODFILE CHECKSUM: a0a088b46255fcdd294e93d069efd9226510498e
 
 COCOAPODS: 1.16.2

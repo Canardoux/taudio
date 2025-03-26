@@ -77,17 +77,16 @@ class _StreamsExampleState extends State<StreamsExample> {
   double _mVolume = 100.0;
   double _mPan = 100.0;
 
-
   Future<void> init() async {
     final session = await AudioSession.instance;
     await session.configure(AudioSessionConfiguration(
       avAudioSessionCategory: AVAudioSessionCategory.playAndRecord,
       avAudioSessionCategoryOptions:
-      AVAudioSessionCategoryOptions.allowBluetooth |
-      AVAudioSessionCategoryOptions.defaultToSpeaker,
+          AVAudioSessionCategoryOptions.allowBluetooth |
+              AVAudioSessionCategoryOptions.defaultToSpeaker,
       avAudioSessionMode: AVAudioSessionMode.spokenAudio,
       avAudioSessionRouteSharingPolicy:
-      AVAudioSessionRouteSharingPolicy.defaultPolicy,
+          AVAudioSessionRouteSharingPolicy.defaultPolicy,
       avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.none,
       androidAudioAttributes: const AndroidAudioAttributes(
         contentType: AndroidAudioContentType.speech,
@@ -346,15 +345,12 @@ class _StreamsExampleState extends State<StreamsExample> {
 
   void pause() async {
     await _mRecorder.pauseRecorder();
-    setState(() {
-    });
+    setState(() {});
   }
 
   void resume() async {
     await _mRecorder.resumeRecorder();
-    setState(() {
-    });
-
+    setState(() {});
   }
   // ----------------------  Here is the code to play from a Stream -----------------------
 
@@ -497,9 +493,6 @@ class _StreamsExampleState extends State<StreamsExample> {
                 //disabledColor: Colors.grey,
                 child: const Text('Resume'),
               ),
-
-
-
             ]),
             const SizedBox(
               height: 20,
@@ -511,15 +504,12 @@ class _StreamsExampleState extends State<StreamsExample> {
                         const AlwaysStoppedAnimation<Color>(Colors.indigo),
                     backgroundColor: Colors.limeAccent)
                 : Container(),
-
             Text(_mRecorder.isRecording
                 ? 'Recording in progress'
                 : 'Recorder is stopped'),
             const SizedBox(
               width: 20,
             ),
-
-
           ]),
         ),
         Container(
