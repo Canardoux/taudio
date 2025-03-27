@@ -1,11 +1,15 @@
+### 10.2.2
+
+- Add two new parameters in startRecorder() on Android : `enableNoiseSuppression` and `enableEchoCancellation`, [(fs 956)](https://github.com/Canardoux/flutter_sound/issues/956)
+
 ### 10.2.1
 
-- Add a trace in the logs to be more verbose on Android when startPlayer() has an exception [fs #1178](https://github.com/Canardoux/flutter_sound/issues/1178)
+- Add a trace in the logs to be more verbose on Android when startPlayer() has an exception [(fs #1178)](https://github.com/Canardoux/flutter_sound/issues/1178)
 
 ### 10.2.0
 
 - [startPlayerFromMic()](https://taudio.canardoux.xyz/api/public_fs_flutter_sound_player/FlutterSoundPlayer/startPlayerFromMic.html) is not flagged anymore as deprecated because it was used by some users.
-- Add a new example : [Play from Mic](https://taudio.canardoux.xyz/tau/examples/ex_play_from_mic.html)
+- Add a new example : [Play from Mic](https://taudio.canardoux.xyz/tau/examples/ex_play_from_mic.html) [(fs 1175)](https://github.com/Canardoux/flutter_sound/issues/1175)
 
 ### 10.1.1
 

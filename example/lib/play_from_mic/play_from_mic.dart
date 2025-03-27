@@ -152,6 +152,8 @@ class _PlayFromMic extends State<PlayFromMic> {
       toStreamFloat32: _mPlayer.float32Sink,
       sampleRate: _sampleRate,
       numChannels: 2,
+      enableNoiseSuppression: bNoiseSuppression,
+      enableEchoCancellation: bEchoCancellation,
     );
     setState(() {});
   }
