@@ -1,3 +1,7 @@
+### 10.2.3
+
+- The flag 'scriptLoaded' was set too early in FlutterSoundWeb' [(#1175)](https://github.com/Canardoux/flutter_sound/issues/1175)
+
 ### 10.2.2
 
 - Add two new parameters in startRecorder() on Android : `enableNoiseSuppression` and `enableEchoCancellation`, [(fs 956)](https://github.com/Canardoux/flutter_sound/issues/956)
