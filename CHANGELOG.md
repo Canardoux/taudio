@@ -1,3 +1,7 @@
+### 10.2.5
+
+- The FlutterSoundWeb was sending a 'stopCompleted' but the internal status was 'notStopped'. [fs #1179](https://github.com/Canardoux/flutter_sound/issues/1179)
+
 ### 10.2.4
 
 - The flag 'scriptLoaded' was set too early in FlutterSoundWeb. [(fs #1175)](https://github.com/Canardoux/flutter_sound/issues/1175)
