@@ -25,6 +25,7 @@
 /// The [FlutterSoundPlayer] class can have multiple instances at the same time. Each instance is used to control the sound of its source.
 ///
 /// ------------------------
+/// {@category flutter_sound}
 library;
 
 import 'dart:async';

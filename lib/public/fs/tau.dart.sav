@@ -33,7 +33,7 @@
 /// - [SoundPlayerUI]
 /// - [SoundRecorderUI]
 /// ------------------------------------------------------------------
-/// @nodoc
+/// {@category flutter_sound}
 library;
 
 import 'dart:typed_data' show Uint8List;

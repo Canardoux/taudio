@@ -19,7 +19,7 @@
  */
 
 /// **THE** Flutter Sound Recorder
-/// {@category Main}
+/// {@category flutter_sound}
 library;
 
 import 'dart:async';
@@ -719,7 +719,7 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
   /// - **_enableNoiseSuppression_** is a boolean that is true if you want to enable Noise Suppression
   /// - **_enableEchoCancellation_** is a boolean that is true if you want to enable Echo Cancellation
   ///
-  /// Note : `enableNoiseSuppression` and `enableEchoCancellation` are only implemented on Android and just when recording to a PCM dart stream.
+  /// Note : `enableNoiseSuppression` and `enableEchoCancellation` are only implemented on Android and just when recording to a PCM dart stream. They are ignored on the other platforms.
   ///
   /// Hint: [path_provider](https://pub.dev/packages/path_provider) can be useful if you want to get access to some directories on your device.
   /// To record a temporary file, the App can specify the name of this temporary file (without slash) instead of a real path.

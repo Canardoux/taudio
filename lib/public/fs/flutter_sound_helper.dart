@@ -23,7 +23,7 @@
 ///
 /// --------------------
 ///
-//   /// {@category Utilities}
+/// {@category flutter_sound}
 library;
 
 import 'dart:async';

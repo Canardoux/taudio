@@ -108,14 +108,14 @@ packages:
       path: "../../flutter_sound_platform_interface"
       relative: true
     source: path
-    version: "10.2.4"
+    version: "10.2.5"
   flutter_sound_web:
     dependency: "direct main"
     description:
       path: "../../flutter_sound_web"
       relative: true
     source: path
-    version: "10.2.4"
+    version: "10.2.5"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -409,7 +409,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "10.2.4"
+    version: "10.2.5"
   term_glyph:
     dependency: transitive
     description:
