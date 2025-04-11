@@ -1,6 +1,6 @@
 name: taudio
 description: "A complete api for audio playback and recording. Member of the `Tau` Family. Audio player, audio recorder. Pray for Ukraine."
-version: 10.2.5
+version: 10.3.0
 homepage: https://taudio.canardoux.xyz/
 repository: https://github.com/canardoux/taudio
 
@@ -23,11 +23,11 @@ dependencies:
   synchronized: ^3.1.0
   logger: ^2.0.2
 # ============================================================================
-  flutter_sound_platform_interface: # 10.2.5
-    path: ../flutter_sound_platform_interface # Flutter Sound Dir
+  flutter_sound_platform_interface: 10.3.0
+#    path: ../flutter_sound_platform_interface # Flutter Sound Dir
 
-  flutter_sound_web: # 10.2.5
-    path: ../flutter_sound_web # Flutter Sound Dir
+  flutter_sound_web: 10.3.0
+#    path: ../flutter_sound_web # Flutter Sound Dir
 
 ##  etau: ^0.0.14-alpha.5
 ##    path: ../../tau/etau # etau Dir
