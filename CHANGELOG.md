@@ -1,6 +1,11 @@
+### 10.3.2
+
+- Android : fixes a stupid regression when writing PCM16WAV data to the file ( [fs #1187](https://github.com/Canardoux/flutter_sound/issues/1187) )
+
 ### 10.3.1
 
-- Remove dummy code when recording PCM16WAV ( [fs #1187](https://github.com/Canardoux/flutter_sound/issues/1187) )
+- Android : Remove dummy code when recording PCM16WAV ( [fs #1187](https://github.com/Canardoux/flutter_sound/issues/1187) )
+
 ### 10.3.0
 
 - Android : Play from Stream - feedxxx() uses an auxiliary thread so not to block the main thread. ([fs #1184](https://github.com/Canardoux/flutter_sound/issues/1184))
