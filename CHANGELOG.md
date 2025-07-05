@@ -1,4 +1,4 @@
-### 10.3.3
+### 10.3.4
 
 - Do not call getStauts because we are not in the good thread. ( [fs #1062](https://github.com/Canardoux/flutter_sound/issues/1062)). Thanks to @rRemix for his/her patch.
 
