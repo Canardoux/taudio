@@ -129,7 +129,7 @@ You can also refer to the following examples that uses UInt8List:
   Example(
     title: 'Record to stream',
     subTitle: 'Record to a dart stream',
-    flags: 0,
+    flags: tNotWeb,
     route: (_) => const RecordToStreamExample(),
     description: '''
 This is an example showing how to record to a Dart Stream.

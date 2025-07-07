@@ -1,6 +1,10 @@
+### 10.3.5
+
+- Android :  Fixes Exception has occurred. PlatformException (PlatformException(error, Attempt to invoke virtual method 'int android.media.AudioTrack.getPlayState()' on a null object reference, null, java.lang.NullPointerException: Attempt to invoke virtual method 'int android.media.AudioTrack.getPlayState()' on a null object reference. ([fs #1178](https://github.com/Canardoux/flutter_sound/issues/1178))
+
 ### 10.3.4
 
-- Do not call getStauts because we are not in the good thread. ( [fs #1062](https://github.com/Canardoux/flutter_sound/issues/1062)). Thanks to @rRemix for his/her patch.
+- iOS : Do not call getStatus when recording to Stream because we are running async and not not in the good thread. ( [fs #1062](https://github.com/Canardoux/flutter_sound/issues/1062)). Thanks to @rRemix for his/her patch.
 
 ### 10.3.2
 
@@ -16,7 +20,7 @@
 
 ### 10.2.5
 
-- The FlutterSoundWeb was sending a 'stopCompleted' but the internal status was 'notStopped'. [fs #1179](https://github.com/Canardoux/flutter_sound/issues/1179)
+- Web : The FlutterSoundWeb was sending a 'stopCompleted' but the internal status was 'notStopped'. [fs #1179](https://github.com/Canardoux/flutter_sound/issues/1179)
 
 ### 10.2.4
 
