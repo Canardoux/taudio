@@ -50,7 +50,7 @@ class _PlayFromMic extends State<PlayFromMic> {
   late FlutterSoundPlayer _mPlayer = FlutterSoundPlayer();
 
   /// Our recorder
-  late FlutterSoundRecorder _mRecorder = FlutterSoundRecorder();
+  final FlutterSoundRecorder _mRecorder = FlutterSoundRecorder();
 
   Future<void> init() async {
     final session = await AudioSession.instance;
@@ -72,7 +72,7 @@ class _PlayFromMic extends State<PlayFromMic> {
       androidWillPauseWhenDucked: true,
     ));
 
-    _mPlayer!.openPlayer().then((value) {
+    _mPlayer.openPlayer().then((value) {
       setState(() {
         _mPlayerIsInited = true;
       });
@@ -118,15 +118,15 @@ class _PlayFromMic extends State<PlayFromMic> {
         throw RecordingPermissionException('Microphone permission not granted');
       }
     }
-    await _mRecorder!.openRecorder();
+    await _mRecorder.openRecorder();
 
-    _recorderSubscription = _mRecorder!.onProgress!.listen((e) {
+    _recorderSubscription = _mRecorder.onProgress!.listen((e) {
       // pos = e.duration.inMilliseconds; // We do not need this information in this example.
       setState(() {
         _dbLevel = e.decibels as double;
       });
     });
-    await _mRecorder!.setSubscriptionDuration(
+    await _mRecorder.setSubscriptionDuration(
         const Duration(milliseconds: 100)); // DO NOT FORGET THIS CALL !!!
 
     _mRecorderIsInited = true;
@@ -136,7 +136,7 @@ class _PlayFromMic extends State<PlayFromMic> {
   /// This is our main function.
   /// We ask Flutter Sound to record to a File.
   void record() async {
-    assert(_mPlayerIsInited && _mRecorder.isStopped && _mPlayer!.isStopped);
+    assert(_mPlayerIsInited && _mRecorder.isStopped && _mPlayer.isStopped);
 
     await _mPlayer.startPlayerFromStream(
       codec: _codec,
@@ -161,7 +161,7 @@ class _PlayFromMic extends State<PlayFromMic> {
   /// Stop the recorder
   void stopRecorder() async {
     await _mPlayer.stopPlayer();
-    await _mRecorder!.stopRecorder().then((value) {
+    await _mRecorder.stopRecorder().then((value) {
       setState(() {
         //var url = value;
       });
@@ -177,7 +177,7 @@ class _PlayFromMic extends State<PlayFromMic> {
 
   /// Stop the player
   void stopPlayer() {
-    _mPlayer!.stopPlayer().then((value) {
+    _mPlayer.stopPlayer().then((value) {
       setState(() {});
     });
   }
@@ -195,7 +195,7 @@ class _PlayFromMic extends State<PlayFromMic> {
     if (!_mRecorderIsInited || !_mPlayerIsInited) {
       return null;
     }
-    return _mRecorder!.isStopped ? record : stopRecorder;
+    return _mRecorder.isStopped ? record : stopRecorder;
   }
 
   @override
@@ -222,19 +222,19 @@ class _PlayFromMic extends State<PlayFromMic> {
                   onPressed: getRecorderFn(),
                   //color: Colors.white,
                   //disabledColor: Colors.grey,
-                  child: Text(_mRecorder!.isRecording ? 'Stop' : 'Record'),
+                  child: Text(_mRecorder.isRecording ? 'Stop' : 'Record'),
                 ),
                 const SizedBox(
                   width: 20,
                 ),
-                Text(_mRecorder!.isRecording
+                Text(_mRecorder.isRecording
                     ? 'Recording in progress'
                     : 'Recorder is stopped'),
               ]),
               const SizedBox(
                 height: 20,
               ),
-              _mRecorder!.isRecording
+              _mRecorder.isRecording
                   ? LinearProgressIndicator(
                       value: _dbLevel / 100,
                       valueColor:

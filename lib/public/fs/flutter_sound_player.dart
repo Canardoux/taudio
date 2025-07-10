@@ -281,9 +281,8 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     _logger.d('---> openPlayerCompleted: $success');
 
     _playerState = PlayerState.values[state];
-    _isInited = success
-        ? Initialized.fullyInitialized
-        : Initialized.notInitialized;
+    _isInited =
+        success ? Initialized.fullyInitialized : Initialized.notInitialized;
     if (_openPlayerCompleter == null) {
       _logger.e('Error : cannot process _openPlayerCompleter');
       return;
@@ -1929,8 +1928,9 @@ class FlutterSoundPlayer implements FlutterSoundPlayerCallback {
     try {
       _pausePlayerCompleter = Completer<void>();
       completer = _pausePlayerCompleter;
-      _playerState = PlayerState
-          .values[await FlutterSoundPlayerPlatform.instance.pausePlayer(this)];
+      _playerState =
+          PlayerState.values[await FlutterSoundPlayerPlatform.instance
+              .pausePlayer(this)];
       //if (_playerState != PlayerState.isPaused) {
       //throw _PlayerRunningException(
       //'Player is not paused.'); // I am not sure that it is good to throw an exception here

@@ -1,6 +1,10 @@
+### 10.3.7
+
+- Android : Flauto Player Engine : check if SDK >= 29 instead of 31. (([fs #1178](https://github.com/Canardoux/flutter_sound/issues/1178)))
+
 ### 10.3.6
 
-- iOS :  remove ```dispatch_async(dispatch_get_main_queue()``` in ```/* ctor */ AudioRecorderEngine``` because too many problem when the recorder is stopped and any way we are already in the main thread. ( [fs #1062](https://github.com/Canardoux/flutter_sound/issues/1062)).
+- iOS :  remove ```dispatch_async(dispatch_get_main_queue()``` in ```/* ctor */ AudioRecorderEngine``` because too many problem when the recorder is stopped/stopped quickly and anyway we are already in the main thread. ( [fs #1062](https://github.com/Canardoux/flutter_sound/issues/1062)).
 
 ### 10.3.5
 

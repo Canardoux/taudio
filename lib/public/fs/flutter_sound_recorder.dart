@@ -276,9 +276,8 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
     _logger.d('---> openRecorderCompleted: $success');
 
     _recorderState = RecorderState.values[state!];
-    _isInited = success!
-        ? Initialized.fullyInitialized
-        : Initialized.notInitialized;
+    _isInited =
+        success! ? Initialized.fullyInitialized : Initialized.notInitialized;
     if (success) {
       _openRecorderCompleter!.complete(this);
     } else {
@@ -890,8 +889,8 @@ class FlutterSoundRecorder implements FlutterSoundRecorderCallback {
         interleaved: (toStreamFloat32 == null && toStreamInt16 == null),
         toStream:
             (toStream != null ||
-            toStreamFloat32 != null ||
-            toStreamInt16 != null),
+                toStreamFloat32 != null ||
+                toStreamInt16 != null),
         bitRate: bitRate,
         bufferSize: bufferSize,
         enableVoiceProcessing: enableVoiceProcessing,
