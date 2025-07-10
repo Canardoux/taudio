@@ -148,7 +148,7 @@ class _LivePlaybackWithoutBackPressureState
     await _mPlayer.startPlayerFromStream(
         codec: codecSelected, // Codec.pcm16
         numChannels: stereo ? 2 : 1,
-        interleaved: false, // This is the default
+        interleaved: true, // This is the default
         sampleRate: sampleRate, // Sample rate is 8000
         bufferSize: 1024
         //bufferSize: cstBLOCKSIZE,

@@ -1,6 +1,10 @@
+### 10.3.6
+
+- iOS :  remove ```dispatch_async(dispatch_get_main_queue()``` in ```/* ctor */ AudioRecorderEngine``` because too many problem when the recorder is stopped and any way we are already in the main thread. ( [fs #1062](https://github.com/Canardoux/flutter_sound/issues/1062)).
+
 ### 10.3.5
 
-- Android :  Fixes Exception has occurred. PlatformException (PlatformException(error, Attempt to invoke virtual method 'int android.media.AudioTrack.getPlayState()' on a null object reference, null, java.lang.NullPointerException: Attempt to invoke virtual method 'int android.media.AudioTrack.getPlayState()' on a null object reference. ([fs #1178](https://github.com/Canardoux/flutter_sound/issues/1178))
+- Android :  Fixes ```Exception has occurred. Attempt to invoke virtual method 'int android.media.AudioTrack.getPlayState()' on a null object reference.``` ([fs #1178](https://github.com/Canardoux/flutter_sound/issues/1178))
 
 ### 10.3.4
 
