@@ -47,7 +47,7 @@ class PlayFromMic extends StatefulWidget {
 
 class _PlayFromMic extends State<PlayFromMic> {
   /// Our player
-  late FlutterSoundPlayer _mPlayer = FlutterSoundPlayer();
+  final FlutterSoundPlayer _mPlayer = FlutterSoundPlayer();
 
   /// Our recorder
   final FlutterSoundRecorder _mRecorder = FlutterSoundRecorder();
@@ -120,7 +120,7 @@ class _PlayFromMic extends State<PlayFromMic> {
     }
     await _mRecorder.openRecorder();
 
-    _recorderSubscription = _mRecorder.onProgress!.listen((e) {
+    /*_recorderSubscription = */ _mRecorder.onProgress!.listen((e) {
       // pos = e.duration.inMilliseconds; // We do not need this information in this example.
       setState(() {
         _dbLevel = e.decibels as double;

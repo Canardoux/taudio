@@ -1,6 +1,10 @@
+### 10.3.8
+
+Android : If the audio is streamed from the server without a Content-Length header and using Transfer-Encoding: chunked, the duration wa always 0, and as a result, the position was also 0, which was incorrect. [fs flutter_sound_core. PR #16](https://github.com/Canardoux/flutter_sound_core/pull/16). Thanks to [MatteoBax](https://github.com/MatteoBax) for his/her contribution.
+
 ### 10.3.7
 
-- Android : Flauto Player Engine : check if SDK >= 29 instead of 31. (([fs #1178](https://github.com/Canardoux/flutter_sound/issues/1178)))
+- Android : Flauto Player Engine : check if SDK >= 29 instead of 31. ([fs #1178](https://github.com/Canardoux/flutter_sound/issues/1178))
 
 ### 10.3.6
 
