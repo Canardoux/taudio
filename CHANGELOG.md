@@ -1,6 +1,6 @@
 ### 10.3.8
 
-Android : If the audio is streamed from the server without a Content-Length header and using Transfer-Encoding: chunked, the duration wa always 0, and as a result, the position was also 0, which was incorrect. [fs flutter_sound_core. PR #16](https://github.com/Canardoux/flutter_sound_core/pull/16). Thanks to [MatteoBax](https://github.com/MatteoBax) for his/her contribution.
+Android : If the audio is streamed from the server without a Content-Length header and using Transfer-Encoding: chunked, the duration was always 0, and as a result, the position was also 0, which was incorrect. [flutter_sound_core. PR #16](https://github.com/Canardoux/flutter_sound_core/pull/16). Thanks to [MatteoBax](https://github.com/MatteoBax) for his/her contribution.
 
 ### 10.3.7
 
@@ -16,7 +16,7 @@ Android : If the audio is streamed from the server without a Content-Length head
 
 ### 10.3.4
 
-- iOS : Do not call getStatus when recording to Stream because we are running async and not not in the good thread. ( [fs #1062](https://github.com/Canardoux/flutter_sound/issues/1062)). Thanks to @rRemix for his/her patch.
+- iOS : Do not call getStatus when recording to Stream because we are running async and not not in the good thread. ( [fs #1062](https://github.com/Canardoux/flutter_sound/issues/1062)). Thanks to [@rRemix](https://github.com/rRemix) for his/her patch.
 
 ### 10.3.2
 

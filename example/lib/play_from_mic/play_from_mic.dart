@@ -106,7 +106,7 @@ class _PlayFromMic extends State<PlayFromMic> {
 
   bool _mRecorderIsInited = false;
   double _dbLevel = 0.0;
-  StreamSubscription? _recorderSubscription;
+  //StreamSubscription? _recorderSubscription;
   bool bNoiseSuppression = false;
   bool bEchoCancellation = false;
 
